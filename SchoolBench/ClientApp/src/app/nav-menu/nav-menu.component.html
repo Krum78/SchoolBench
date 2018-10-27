@@ -22,11 +22,22 @@
                         <span class='glyphicon glyphicon-education'></span> Counter
                     </a>
                 </li>
-                <li [routerLinkActive]='["link-active"]'>
-                    <a [routerLink]='["/fetch-data"]' (click)='collapse()'>
-                        <span class='glyphicon glyphicon-th-list'></span> Fetch data
-                    </a>
-                </li>
+              <li [routerLinkActive]='["link-active"]'>
+                <a [routerLink]='["/fetch-data"]' (click)='collapse()'>
+                  <span class='glyphicon glyphicon-th-list'></span> Fetch data
+                </a>
+              </li>
+              <li>
+                With sub menus
+                <ul>
+                  <li>
+                    menu 1
+                  </li>
+                  <li>
+                    menu 2
+                  </li>
+                </ul>
+              </li>
             </ul>
         </div>
     </div>
