@@ -1,0 +1,262 @@
+2018-10-27 19:36:01.487 +03:00 [DBG] Using Identity.Application as default scheme for authentication
+2018-10-27 19:36:01.510 +03:00 [DBG] Using Identity.External as default scheme for sign-in
+2018-10-27 19:36:01.510 +03:00 [DBG] Using Identity.External as default scheme for sign-out
+2018-10-27 19:36:01.510 +03:00 [DBG] Using Identity.Application as default scheme for challenge
+2018-10-27 19:36:01.510 +03:00 [DBG] Using Identity.Application as default scheme for forbid
+2018-10-27 19:36:12.223 +03:00 [FTL] Application startup exception
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'table "ApiResources" already exists'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteNonQuery()
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.Execute(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues)
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteNonQuery(IRelationalConnection connection, IReadOnlyDictionary`2 parameterValues)
+   at Microsoft.EntityFrameworkCore.Migrations.MigrationCommand.ExecuteNonQuery(IRelationalConnection connection, IReadOnlyDictionary`2 parameterValues)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.MigrationCommandExecutor.ExecuteNonQuery(IEnumerable`1 migrationCommands, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.Migrate(String targetMigration)
+   at Microsoft.EntityFrameworkCore.RelationalDatabaseFacadeExtensions.Migrate(DatabaseFacade databaseFacade)
+   at IdentityExpress.Manager.Api.Startup.ConfigureMigrations(IServiceScope serviceScope)
+   at IdentityExpress.Manager.Api.Startup.Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+   at IdentityServer4.AdminUIExtensions.UseAdminUI(IApplicationBuilder appBuilder)
+   at SchoolBench.IS4.Startup.Configure(IApplicationBuilder app) in e:\Projects\SchoolBench\SchoolBench.IS4\Startup.cs:line 117
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at Microsoft.AspNetCore.Hosting.ConventionBasedStartup.Configure(IApplicationBuilder app)
+   at Microsoft.AspNetCore.ApplicationInsights.HostingStartup.ApplicationInsightsLoggerStartupFilter.<>c__DisplayClass0_0.<Configure>b__0(IApplicationBuilder builder)
+   at Microsoft.ApplicationInsights.AspNetCore.ApplicationInsightsStartupFilter.<>c__DisplayClass0_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Server.IISIntegration.IISSetupFilter.<>c__DisplayClass3_0.<Configure>b__0(IApplicationBuilder app)
+   at Microsoft.AspNetCore.Hosting.Internal.AutoRequestServicesStartupFilter.<>c__DisplayClass0_0.<Configure>b__0(IApplicationBuilder builder)
+   at Microsoft.AspNetCore.Hosting.Internal.WebHost.BuildApplication()
+2018-10-27 19:36:12.602 +03:00 [ERR] Connection id "0HLHS5979NJE2", Request id "0HLHS5979NJE2:00000001": An unhandled exception was thrown by the application.
+System.ObjectDisposedException: Cannot access a disposed object.
+Object name: 'FrameResponseStream'.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.FrameResponseStream.ValidateState(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.FrameResponseStream.WriteAsync(Byte[] buffer, Int32 offset, Int32 count, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.FrameResponseStream.Write(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.StreamWriter.Flush(Boolean flushStream, Boolean flushEncoder)
+   at System.IO.StreamWriter.Write(String value)
+   at Microsoft.AspNetCore.Hosting.Views.ErrorPage.<ExecuteAsync>d__6.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.Extensions.RazorViews.BaseView.<ExecuteAsync>d__29.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.Frame`1.<ProcessRequestsAsync>d__2.MoveNext()
+2018-10-27 19:37:12.360 +03:00 [DBG] Using Identity.Application as default scheme for authentication
+2018-10-27 19:37:12.380 +03:00 [DBG] Using Identity.External as default scheme for sign-in
+2018-10-27 19:37:12.380 +03:00 [DBG] Using Identity.External as default scheme for sign-out
+2018-10-27 19:37:12.380 +03:00 [DBG] Using Identity.Application as default scheme for challenge
+2018-10-27 19:37:12.380 +03:00 [DBG] Using Identity.Application as default scheme for forbid
+2018-10-27 19:37:12.969 +03:00 [WRN] The 'bool' property 'UserEditable' on entity type 'IdentityExpressClaimType' is configured with a database-generated default. This default will always be used when the property has the value 'false', since this is the CLR default for the 'bool' type. Consider using the nullable 'bool?' type instead so that the default will only be used when the property value is 'null'.
+2018-10-27 19:37:28.325 +03:00 [INF] AuthenticationScheme: Identity.Application was challenged.
+2018-10-27 19:37:47.464 +03:00 [DBG] Request path /.well-known/openid-configuration matched to endpoint type Discovery
+2018-10-27 19:37:47.468 +03:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryEndpoint
+2018-10-27 19:37:47.468 +03:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2018-10-27 19:37:47.474 +03:00 [DBG] Start discovery request
+2018-10-27 19:37:47.618 +03:00 [DBG] Found ["openid","profile"] as all scopes in database
+2018-10-27 19:37:51.852 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:39:19.716 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:39:19.770 +03:00 [INF] Creating User
+2018-10-27 19:39:19.944 +03:00 [WRN] The Include operation for navigation '[x].Roles.Role' is unnecessary and was ignored because the navigation is not reachable in the final query results. See https://go.microsoft.com/fwlink/?linkid=850303 for more information.
+2018-10-27 19:39:19.944 +03:00 [WRN] The Include operation for navigation '[x].Claims.ClaimTypeNav' is unnecessary and was ignored because the navigation is not reachable in the final query results. See https://go.microsoft.com/fwlink/?linkid=850303 for more information.
+2018-10-27 19:39:19.989 +03:00 [INF] Successfully Created User
+2018-10-27 19:39:20.008 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:39:20.025 +03:00 [INF] Finding User by Subject e075f8a3-3473-4e70-9972-ecf3b5379b23
+2018-10-27 19:39:20.057 +03:00 [INF] Successfully Retrieved item by Subject e075f8a3-3473-4e70-9972-ecf3b5379b23
+2018-10-27 19:39:49.759 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:39:49.776 +03:00 [INF] Getting Apps
+2018-10-27 19:39:49.794 +03:00 [WRN] The LINQ expression 'where (([x].Expiration == null) OrElse (Convert(DateTime.UtcNow, Nullable`1) < [x].Expiration))' could not be translated and will be evaluated locally.
+2018-10-27 19:39:49.803 +03:00 [INF] Successfully Retrieved Apps for Subject e075f8a3-3473-4e70-9972-ecf3b5379b23
+2018-10-27 19:39:56.887 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:44:47.025 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:44:47.289 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:44:50.601 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:44:53.015 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:44:53.028 +03:00 [INF] Finding User by Subject e075f8a3-3473-4e70-9972-ecf3b5379b23
+2018-10-27 19:44:53.030 +03:00 [INF] Successfully Retrieved item by Subject e075f8a3-3473-4e70-9972-ecf3b5379b23
+2018-10-27 19:44:56.003 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:44:56.022 +03:00 [INF] Getting Apps
+2018-10-27 19:44:56.023 +03:00 [INF] Successfully Retrieved Apps for Subject e075f8a3-3473-4e70-9972-ecf3b5379b23
+2018-10-27 19:45:16.460 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:45:18.454 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:45:56.696 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:46:48.083 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:46:50.834 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:46:50.847 +03:00 [INF] Finding User by Subject e075f8a3-3473-4e70-9972-ecf3b5379b23
+2018-10-27 19:46:50.848 +03:00 [INF] Successfully Retrieved item by Subject e075f8a3-3473-4e70-9972-ecf3b5379b23
+2018-10-27 19:46:56.019 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:46:56.036 +03:00 [INF] Finding User by Subject e075f8a3-3473-4e70-9972-ecf3b5379b23
+2018-10-27 19:46:56.038 +03:00 [INF] Creating Roles
+2018-10-27 19:46:56.044 +03:00 [WRN] The LINQ expression 'where {from Role y in __8__locals1_roles_0 where (__normalizer_1.Normalize([y].Name) == [x].NormalizedName) select [y] => Any()}' could not be translated and will be evaluated locally.
+2018-10-27 19:46:56.045 +03:00 [WRN] The LINQ expression 'where (__normalizer_1.Normalize([y].Name) == [x].NormalizedName)' could not be translated and will be evaluated locally.
+2018-10-27 19:46:56.045 +03:00 [WRN] The LINQ expression 'Any()' could not be translated and will be evaluated locally.
+2018-10-27 19:46:56.095 +03:00 [INF] Successfully Created Roles
+2018-10-27 19:47:09.239 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:47:09.258 +03:00 [INF] Getting Apps
+2018-10-27 19:47:09.260 +03:00 [INF] Successfully Retrieved Apps for Subject e075f8a3-3473-4e70-9972-ecf3b5379b23
+2018-10-27 19:47:53.861 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:48:05.926 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:48:07.321 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:48:55.843 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:48:55.857 +03:00 [INF] Creating User
+2018-10-27 19:48:55.884 +03:00 [INF] Successfully Created User
+2018-10-27 19:48:55.894 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:48:55.908 +03:00 [INF] Finding User by Subject a6357a10-c2a3-41fd-a60b-cef70ae5c4b3
+2018-10-27 19:48:55.910 +03:00 [INF] Successfully Retrieved item by Subject a6357a10-c2a3-41fd-a60b-cef70ae5c4b3
+2018-10-27 19:49:00.630 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:49:00.643 +03:00 [INF] Finding User by Subject a6357a10-c2a3-41fd-a60b-cef70ae5c4b3
+2018-10-27 19:49:00.645 +03:00 [INF] Creating Roles
+2018-10-27 19:49:00.663 +03:00 [INF] Successfully Created Roles
+2018-10-27 19:49:03.268 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:49:03.283 +03:00 [INF] Getting Apps
+2018-10-27 19:49:03.284 +03:00 [INF] Successfully Retrieved Apps for Subject a6357a10-c2a3-41fd-a60b-cef70ae5c4b3
+2018-10-27 19:49:06.061 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:49:33.318 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:49:33.335 +03:00 [INF] Creating User
+2018-10-27 19:49:33.374 +03:00 [INF] Successfully Created User
+2018-10-27 19:49:33.383 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:49:33.405 +03:00 [INF] Finding User by Subject 9e084dd5-d62f-4356-9c89-cade93b33731
+2018-10-27 19:49:33.407 +03:00 [INF] Successfully Retrieved item by Subject 9e084dd5-d62f-4356-9c89-cade93b33731
+2018-10-27 19:49:38.788 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:49:38.803 +03:00 [INF] Finding User by Subject 9e084dd5-d62f-4356-9c89-cade93b33731
+2018-10-27 19:49:38.805 +03:00 [INF] Creating Roles
+2018-10-27 19:49:38.820 +03:00 [INF] Successfully Created Roles
+2018-10-27 19:49:45.674 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:49:45.692 +03:00 [INF] Getting Apps
+2018-10-27 19:49:45.694 +03:00 [INF] Successfully Retrieved Apps for Subject 9e084dd5-d62f-4356-9c89-cade93b33731
+2018-10-27 19:49:49.743 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:50:20.611 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:50:20.625 +03:00 [INF] Creating User
+2018-10-27 19:50:20.655 +03:00 [INF] Successfully Created User
+2018-10-27 19:50:20.664 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:50:20.685 +03:00 [INF] Finding User by Subject 0c8fcb42-36c1-4a3a-b255-ce8d5aa9d63b
+2018-10-27 19:50:20.687 +03:00 [INF] Successfully Retrieved item by Subject 0c8fcb42-36c1-4a3a-b255-ce8d5aa9d63b
+2018-10-27 19:50:24.142 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:50:24.158 +03:00 [INF] Finding User by Subject 0c8fcb42-36c1-4a3a-b255-ce8d5aa9d63b
+2018-10-27 19:50:24.160 +03:00 [INF] Creating Roles
+2018-10-27 19:50:24.173 +03:00 [INF] Successfully Created Roles
+2018-10-27 19:50:26.626 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:50:26.646 +03:00 [INF] Getting Apps
+2018-10-27 19:50:26.647 +03:00 [INF] Successfully Retrieved Apps for Subject 0c8fcb42-36c1-4a3a-b255-ce8d5aa9d63b
+2018-10-27 19:50:32.004 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 19:53:29.002 +03:00 [DBG] Using Identity.Application as default scheme for authentication
+2018-10-27 19:53:29.023 +03:00 [DBG] Using Identity.External as default scheme for sign-in
+2018-10-27 19:53:29.023 +03:00 [DBG] Using Identity.External as default scheme for sign-out
+2018-10-27 19:53:29.023 +03:00 [DBG] Using Identity.Application as default scheme for challenge
+2018-10-27 19:53:29.023 +03:00 [DBG] Using Identity.Application as default scheme for forbid
+2018-10-27 19:53:29.383 +03:00 [WRN] The 'bool' property 'UserEditable' on entity type 'IdentityExpressClaimType' is configured with a database-generated default. This default will always be used when the property has the value 'false', since this is the CLR default for the 'bool' type. Consider using the nullable 'bool?' type instead so that the default will only be used when the property value is 'null'.
+2018-10-27 19:53:37.270 +03:00 [INF] AuthenticationScheme: Identity.Application was challenged.
+2018-10-27 19:53:54.932 +03:00 [DBG] CORS request made for path: /account/login from origin: null but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2018-10-27 19:53:55.114 +03:00 [DBG] Augmenting SignInContext
+2018-10-27 19:53:55.116 +03:00 [DBG] Adding idp claim with value: local
+2018-10-27 19:53:55.116 +03:00 [DBG] Adding amr claim with value: pwd
+2018-10-27 19:53:55.116 +03:00 [DBG] Adding auth_time claim with value: 1540659235
+2018-10-27 19:53:55.127 +03:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2018-10-27 19:53:55.176 +03:00 [INF] {
+  "Name": "User Login Success",
+  "Category": "Authentication",
+  "EventType": "Success",
+  "Id": 1000,
+  "Username": "oherasymov",
+  "SubjectId": "e075f8a3-3473-4e70-9972-ecf3b5379b23",
+  "DisplayName": "oherasymov",
+  "Endpoint": "UI",
+  "ActivityId": "0HLHS5ISDE1ND:00000004",
+  "TimeStamp": "2018-10-27T16:53:55Z",
+  "ProcessId": 7980,
+  "LocalIpAddress": "127.0.0.1:23650",
+  "RemoteIpAddress": "::1"
+}
+2018-10-27 19:53:55.187 +03:00 [INF] AuthenticationScheme: Identity.Application was successfully authenticated.
+2018-10-27 19:53:55.187 +03:00 [INF] AuthenticationScheme: Identity.Application was successfully authenticated.
+2018-10-27 19:54:03.517 +03:00 [DBG] 0 persisted grants found for e075f8a3-3473-4e70-9972-ecf3b5379b23
+2018-10-27 19:54:20.479 +03:00 [INF] AuthenticationScheme: Identity.Application was successfully authenticated.
+2018-10-27 19:54:20.479 +03:00 [INF] AuthenticationScheme: Identity.Application was successfully authenticated.
+2018-10-27 19:54:24.870 +03:00 [DBG] CORS request made for path: /Account/Logout from origin: null but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2018-10-27 19:54:24.871 +03:00 [INF] AuthenticationScheme: Identity.Application was successfully authenticated.
+2018-10-27 19:54:24.871 +03:00 [INF] AuthenticationScheme: Identity.Application was successfully authenticated.
+2018-10-27 19:54:24.897 +03:00 [INF] AuthenticationScheme: Identity.Application signed out.
+2018-10-27 19:54:24.897 +03:00 [INF] AuthenticationScheme: Identity.External signed out.
+2018-10-27 19:54:24.897 +03:00 [INF] AuthenticationScheme: Identity.TwoFactorUserId signed out.
+2018-10-27 19:54:24.905 +03:00 [INF] {
+  "Name": "User Logout Success",
+  "Category": "Authentication",
+  "EventType": "Success",
+  "Id": 1002,
+  "SubjectId": "e075f8a3-3473-4e70-9972-ecf3b5379b23",
+  "DisplayName": "oherasymov",
+  "ActivityId": "0HLHS5ISDE1NF:00000004",
+  "TimeStamp": "2018-10-27T16:54:24Z",
+  "ProcessId": 7980,
+  "LocalIpAddress": "127.0.0.1:23650",
+  "RemoteIpAddress": "::1"
+}
+2018-10-27 19:54:40.329 +03:00 [DBG] CORS request made for path: /.well-known/openid-configuration from origin: https://localhost:44314
+2018-10-27 19:54:40.354 +03:00 [DBG] Origin https://localhost:44314 is allowed: false
+2018-10-27 19:54:40.354 +03:00 [WRN] CorsPolicyService did not allow origin: https://localhost:44314
+2018-10-27 19:54:40.354 +03:00 [DBG] Request path /.well-known/openid-configuration matched to endpoint type Discovery
+2018-10-27 19:54:40.358 +03:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryEndpoint
+2018-10-27 19:54:40.358 +03:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2018-10-27 19:54:40.361 +03:00 [DBG] Start discovery request
+2018-10-27 19:54:40.699 +03:00 [DBG] Found ["openid","profile"] as all scopes in database
+2018-10-27 19:54:41.405 +03:00 [DBG] CORS request made for path: /system/nop from origin: https://localhost:44314 but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2018-10-27 19:54:42.576 +03:00 [DBG] CORS request made for path: /users/lightweight from origin: https://localhost:44314 but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2018-10-27 19:54:42.580 +03:00 [DBG] CORS request made for path: /ClaimTypes from origin: https://localhost:44314 but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2018-10-27 19:54:42.603 +03:00 [DBG] CORS request made for path: /users/lightweight from origin: https://localhost:44314 but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2018-10-27 19:54:42.603 +03:00 [DBG] CORS request made for path: /ClaimTypes from origin: https://localhost:44314 but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2018-10-27 19:54:42.609 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 20:07:29.440 +03:00 [DBG] Using Identity.Application as default scheme for authentication
+2018-10-27 20:07:29.461 +03:00 [DBG] Using Identity.External as default scheme for sign-in
+2018-10-27 20:07:29.461 +03:00 [DBG] Using Identity.External as default scheme for sign-out
+2018-10-27 20:07:29.461 +03:00 [DBG] Using Identity.Application as default scheme for challenge
+2018-10-27 20:07:29.461 +03:00 [DBG] Using Identity.Application as default scheme for forbid
+2018-10-27 20:07:29.854 +03:00 [WRN] The 'bool' property 'UserEditable' on entity type 'IdentityExpressClaimType' is configured with a database-generated default. This default will always be used when the property has the value 'false', since this is the CLR default for the 'bool' type. Consider using the nullable 'bool?' type instead so that the default will only be used when the property value is 'null'.
+2018-10-27 20:07:44.516 +03:00 [DBG] Request path /.well-known/openid-configuration matched to endpoint type Discovery
+2018-10-27 20:07:44.530 +03:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryEndpoint
+2018-10-27 20:07:44.530 +03:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2018-10-27 20:07:44.532 +03:00 [DBG] Start discovery request
+2018-10-27 20:07:44.817 +03:00 [DBG] Found ["openid","profile"] as all scopes in database
+2018-10-27 20:13:09.768 +03:00 [DBG] Using Identity.Application as default scheme for authentication
+2018-10-27 20:13:09.792 +03:00 [DBG] Using Identity.External as default scheme for sign-in
+2018-10-27 20:13:09.792 +03:00 [DBG] Using Identity.External as default scheme for sign-out
+2018-10-27 20:13:09.792 +03:00 [DBG] Using Identity.Application as default scheme for challenge
+2018-10-27 20:13:09.792 +03:00 [DBG] Using Identity.Application as default scheme for forbid
+2018-10-27 20:13:10.178 +03:00 [WRN] The 'bool' property 'UserEditable' on entity type 'IdentityExpressClaimType' is configured with a database-generated default. This default will always be used when the property has the value 'false', since this is the CLR default for the 'bool' type. Consider using the nullable 'bool?' type instead so that the default will only be used when the property value is 'null'.
+2018-10-27 20:13:18.963 +03:00 [INF] AuthenticationScheme: Identity.Application was challenged.
+2018-10-27 20:13:25.169 +03:00 [DBG] CORS request made for path: /.well-known/openid-configuration from origin: https://localhost:44314
+2018-10-27 20:13:25.202 +03:00 [DBG] Origin https://localhost:44314 is allowed: false
+2018-10-27 20:13:25.205 +03:00 [WRN] CorsPolicyService did not allow origin: https://localhost:44314
+2018-10-27 20:13:25.206 +03:00 [DBG] Request path /.well-known/openid-configuration matched to endpoint type Discovery
+2018-10-27 20:13:25.210 +03:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryEndpoint
+2018-10-27 20:13:25.210 +03:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2018-10-27 20:13:25.213 +03:00 [DBG] Start discovery request
+2018-10-27 20:13:25.564 +03:00 [DBG] Found ["openid","profile"] as all scopes in database
+2018-10-27 20:13:26.223 +03:00 [DBG] CORS request made for path: /system/nop from origin: https://localhost:44314 but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2018-10-27 20:14:48.490 +03:00 [DBG] CORS request made for path: /users/lightweight from origin: https://localhost:44314 but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2018-10-27 20:14:48.490 +03:00 [DBG] CORS request made for path: /ClaimTypes from origin: https://localhost:44314 but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2018-10-27 20:14:48.515 +03:00 [DBG] CORS request made for path: /users/lightweight from origin: https://localhost:44314 but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2018-10-27 20:14:48.516 +03:00 [DBG] CORS request made for path: /ClaimTypes from origin: https://localhost:44314 but was ignored because path was not for an allowed IdentityServer CORS endpoint
+2018-10-27 20:14:48.520 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 20:32:14.975 +03:00 [DBG] Using Identity.Application as default scheme for authentication
+2018-10-27 20:32:14.994 +03:00 [DBG] Using Identity.External as default scheme for sign-in
+2018-10-27 20:32:14.995 +03:00 [DBG] Using Identity.External as default scheme for sign-out
+2018-10-27 20:32:14.995 +03:00 [DBG] Using Identity.Application as default scheme for challenge
+2018-10-27 20:32:14.995 +03:00 [DBG] Using Identity.Application as default scheme for forbid
+2018-10-27 20:32:15.388 +03:00 [WRN] The 'bool' property 'UserEditable' on entity type 'IdentityExpressClaimType' is configured with a database-generated default. This default will always be used when the property has the value 'false', since this is the CLR default for the 'bool' type. Consider using the nullable 'bool?' type instead so that the default will only be used when the property value is 'null'.
+2018-10-27 20:32:26.081 +03:00 [DBG] Request path /.well-known/openid-configuration matched to endpoint type Discovery
+2018-10-27 20:32:26.103 +03:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryEndpoint
+2018-10-27 20:32:26.103 +03:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2018-10-27 20:32:26.106 +03:00 [DBG] Start discovery request
+2018-10-27 20:32:26.462 +03:00 [DBG] Found ["openid","profile"] as all scopes in database
+2018-10-27 20:32:29.631 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 20:33:03.470 +03:00 [DBG] Request path /.well-known/openid-configuration matched to endpoint type Discovery
+2018-10-27 20:33:03.471 +03:00 [DBG] Endpoint enabled: Discovery, successfully created handler: IdentityServer4.Endpoints.DiscoveryEndpoint
+2018-10-27 20:33:03.471 +03:00 [INF] Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2018-10-27 20:33:03.471 +03:00 [DBG] Start discovery request
+2018-10-27 20:33:03.476 +03:00 [DBG] Found ["openid","profile"] as all scopes in database
+2018-10-27 20:33:07.041 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 20:33:21.595 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 20:33:29.022 +03:00 [FTL] ****** Using non-production Community Edition ******
+2018-10-27 20:34:04.031 +03:00 [FTL] ****** Using non-production Community Edition ******
