@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using IdentityServer4.AccessTokenValidation;
 
 namespace SchoolBench
 {
@@ -21,6 +21,16 @@ namespace SchoolBench
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+                .AddIdentityServerAuthentication(options =>
+                {
+                    options.Authority = "https://localhost:44314";
+                    options.RequireHttpsMetadata = true;
+                    options.EnableCaching = true;
+                    options.ApiSecret = "aVBvh2zBUE6HyrKQZaPC/dkeCJnLIHSy7LW2HMpSEOBHK8S9U8g7Fjq3Wv2aR5k4ItFbhUngOmmTD6for2eJqQ==";
+                    options.ApiName = "api2";
+                });
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -42,6 +52,8 @@ namespace SchoolBench
                 app.UseHsts();
             }
 
+            app.UseAuthentication();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
@@ -51,6 +63,9 @@ namespace SchoolBench
                 routes.MapRoute(
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
+                routes.MapSpaFallbackRoute(
+                    name: "spa-fallback",
+                    defaults: new { controller = "Home", action = "SpaFallback" });
             });
 
             app.UseSpa(spa =>

@@ -7,6 +7,6 @@
     "logoutUrl": "https://localhost:44385",
     "silentRefreshRedirectUri": "https://localhost:44385/silent-refresh.html",
     "clientId": "4d7c3a0292d24c7abc7f7ee9fdf5b403",
-    "scope": "openid profile api1"
+    "scope": "openid profile api1 api2"
   }
 }

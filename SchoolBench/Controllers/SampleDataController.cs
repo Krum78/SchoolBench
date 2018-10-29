@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SchoolBench.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     public class SampleDataController : Controller
     {
         private static string[] Summaries = new[]
@@ -17,6 +19,8 @@ namespace SchoolBench.Controllers
         [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
         {
+            var user = Request.HttpContext.User;
+
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
