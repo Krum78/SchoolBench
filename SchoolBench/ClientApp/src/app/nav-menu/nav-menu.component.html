@@ -18,14 +18,14 @@
               <span class='glyphicon glyphicon-home'></span> Home
             </a>
           </li>
-          <li *ngIf="isAuthenticated" [routerLinkActive]='["link-active"]' >
+          <li *ngIf="isAuthenticated && isUserStudent" [routerLinkActive]='["link-active"]' >
             <a [routerLink]='["/counter"]' (click)='collapse()'>
               <span class='glyphicon glyphicon-education'></span> Counter
             </a>
           </li>
-          <li *ngIf="isAuthenticated" [routerLinkActive]='["link-active"]'>
+          <li *ngIf="isAuthenticated && isUserCreator" [routerLinkActive]='["link-active"]'>
             <a [routerLink]='["/fetch-data"]' (click)='collapse()'>
-              <span class='glyphicon glyphicon-th-list'></span> Fetch data
+              <span class='glyphicon glyphicon-th-list'></span> Manage
             </a>
           </li>
         </ul>

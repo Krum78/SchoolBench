@@ -10,6 +10,7 @@ import { User } from '../models/user';
 export class AuthHelper  {
 
   private authenticationChanged = new Subject<boolean>();
+  private userInfoUpdatedSubject = new Subject<User>();
 
   private userObj: User = null;
 
@@ -30,6 +31,10 @@ export class AuthHelper  {
     return this.authenticationChanged.asObservable();
   }
 
+  public userInfoUpdated(): any {
+    return this.userInfoUpdatedSubject.asObservable();
+  }
+
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
 
@@ -46,24 +51,26 @@ export class AuthHelper  {
     this.oauthService.logOut();
     this.userObj = null;
     this.authenticationChanged.next(this.isAuthenticated());
+    this.userInfoUpdatedSubject.next(null);
   }
 
   public doPostLogin() {
     this.authenticationChanged.next(this.isAuthenticated());
 
-    this.getCurrentUser().then((user) => console.log(user));
+    this.getCurrentUser().then(() => console.log('user loaded'));
   }
 
   async getCurrentUser():  Promise<User> {
     if (this.userObj === null && this.isAuthenticated()) {
       this.userObj = await this.apiCli.getUser();
+      this.userInfoUpdatedSubject.next(this.userObj);
     }
 
     return this.userObj;
   }
 
-  public isInRole(role: string) {
-    return this.userObj !== null && this.userObj.Roles !== null && this.userObj.Roles.includes(role);
+  public static isInRole(userInfo: User, role: string) {
+    return userInfo !== undefined && userInfo !== null && userInfo.roles !== null && userInfo.roles.includes(role);
   }
 
   public loadDiscoveryAndTryLogin() {
