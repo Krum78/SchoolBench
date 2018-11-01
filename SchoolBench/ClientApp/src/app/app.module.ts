@@ -14,6 +14,7 @@ import { AuthHelper } from "./services/auth.helper";
 import { AuthGuard } from "./services/auth.guard";
 import { Environment } from "./services/environment";
 import { TokenInterceptor } from "./services/token.interceptor";
+import { MainApiClient } from "./services/main.api.client";
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -66,6 +67,7 @@ const appInitializerFn = (env: Environment) => {
   providers: [
     Environment,
     AuthHelper,
+    MainApiClient,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,

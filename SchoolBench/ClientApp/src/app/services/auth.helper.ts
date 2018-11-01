@@ -3,21 +3,22 @@ import { isPlatformBrowser } from '@angular/common';
 import { Subject } from 'rxjs';
 import { OAuthService, JwksValidationHandler, AuthConfig } from "angular-oauth2-oidc";
 import { Environment } from "./environment";
+import { MainApiClient } from './main.api.client';
+import { User } from '../models/user';
 
 @Injectable()
 export class AuthHelper  {
 
   private authenticationChanged = new Subject<boolean>();
 
+  private userObj: User = null;
+
   constructor(@Inject(PLATFORM_ID) private platformId: string,
-    private oauthService: OAuthService, private env: Environment) {
+    private oauthService: OAuthService, private env: Environment, private apiCli: MainApiClient) {
     if (isPlatformBrowser(this.platformId)) {
 
-      let authConfig = env.authConfig;
-
-      this.oauthService.configure(authConfig);
+      this.oauthService.configure(this.env.authConfig);
       this.oauthService.tokenValidationHandler = new JwksValidationHandler();
-      this.oauthService.loadDiscoveryDocumentAndTryLogin();
     }
   }
 
@@ -43,11 +44,30 @@ export class AuthHelper  {
 
   public logout(): void {
     this.oauthService.logOut();
+    this.userObj = null;
     this.authenticationChanged.next(this.isAuthenticated());
   }
 
   public doPostLogin() {
     this.authenticationChanged.next(this.isAuthenticated());
+
+    this.getCurrentUser().then((user) => console.log(user));
+  }
+
+  async getCurrentUser():  Promise<User> {
+    if (this.userObj === null && this.isAuthenticated()) {
+      this.userObj = await this.apiCli.getUser();
+    }
+
+    return this.userObj;
+  }
+
+  public isInRole(role: string) {
+    return this.userObj !== null && this.userObj.Roles !== null && this.userObj.Roles.includes(role);
+  }
+
+  public loadDiscoveryAndTryLogin() {
+    this.oauthService.loadDiscoveryDocumentAndTryLogin();
   }
 
   public login(): void {

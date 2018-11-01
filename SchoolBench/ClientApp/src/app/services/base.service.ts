@@ -6,7 +6,7 @@ import { AuthHelper } from './auth.helper';
 @Injectable()
 export class BaseService {
 
-  constructor(private authHelper: AuthHelper) { }
+  constructor() { }
 
   public extractData(res: Response) {
 

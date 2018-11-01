@@ -27,4 +27,8 @@ export class Environment {
     let aCfg = this.cfg.authConfig as AuthConfig;
     return aCfg;
   }
+
+  get mainApiUrl(): string {
+    return this.cfg.mainApiUrl as string;
+  }
 }

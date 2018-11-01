@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { startWith, delay } from 'rxjs/operators';
 
@@ -9,7 +9,7 @@ import { AuthHelper } from '../services/auth.helper';
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.css']
 })
-export class NavMenuComponent implements AfterViewInit {
+export class NavMenuComponent implements OnInit {
   subscription: Subscription;
 
   isExpanded = false;
@@ -17,7 +17,7 @@ export class NavMenuComponent implements AfterViewInit {
 
   constructor(private authHelper: AuthHelper) { }
 
-  ngAfterViewInit() {
+  ngOnInit() {
     this.isAuthenticated = this.authHelper.isAuthenticated();
 
     this.subscription = this.authHelper.isAuthenticationChanged().pipe(

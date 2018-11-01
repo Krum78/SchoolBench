@@ -18,18 +18,16 @@
               <span class='glyphicon glyphicon-home'></span> Home
             </a>
           </li>
-          <ng-template [ngIf]="isAuthenticated">
-            <li [routerLinkActive]='["link-active"]' >
-              <a [routerLink]='["/counter"]' (click)='collapse()'>
-                <span class='glyphicon glyphicon-education'></span> Counter
-              </a>
-            </li>
-            <li [routerLinkActive]='["link-active"]'>
-              <a [routerLink]='["/fetch-data"]' (click)='collapse()'>
-                <span class='glyphicon glyphicon-th-list'></span> Fetch data
-              </a>
-            </li>
-          </ng-template>
+          <li *ngIf="isAuthenticated" [routerLinkActive]='["link-active"]' >
+            <a [routerLink]='["/counter"]' (click)='collapse()'>
+              <span class='glyphicon glyphicon-education'></span> Counter
+            </a>
+          </li>
+          <li *ngIf="isAuthenticated" [routerLinkActive]='["link-active"]'>
+            <a [routerLink]='["/fetch-data"]' (click)='collapse()'>
+              <span class='glyphicon glyphicon-th-list'></span> Fetch data
+            </a>
+          </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <!--<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->
