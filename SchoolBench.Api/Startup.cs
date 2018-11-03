@@ -2,15 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using SchoolBench.Api.Models;
+using SchoolBench.Api.Services;
+using SchoolBench.Repository;
+using SchoolBench.Repository.Entities;
 
 namespace SchoolBench.Api
 {
@@ -36,6 +42,9 @@ namespace SchoolBench.Api
                     options.EnableCaching = true;
                     options.ApiName = "api2";
                 });
+
+            services.AddDbContext<SbDataContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IDbAccessService, DbAccessService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,6 +72,22 @@ namespace SchoolBench.Api
 
             app.UseAuthentication();
             app.UseMvc();
+
+            InitializeMapper();
+        }
+
+        private void InitializeMapper()
+        {
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<CourseModel, CourseEntity>().ReverseMap();
+                cfg.CreateMap<CourseModuleModel, CourseModuleEntity>().ReverseMap();
+                cfg.CreateMap<ModuleTestModel, ModuleTestEntity>().ReverseMap();
+                cfg.CreateMap<TestItemModel, TestItemEntity>().ReverseMap();
+                cfg.CreateMap<TestItemOptionModel, TestItemOptionEntity>().ReverseMap();
+            });
+
+            Mapper.Configuration.AssertConfigurationIsValid();
         }
     }
 }
