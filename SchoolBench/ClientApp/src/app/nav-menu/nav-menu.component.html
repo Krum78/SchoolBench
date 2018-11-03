@@ -24,10 +24,29 @@
             </a>
           </li>
           <li *ngIf="isAuthenticated && isUserCreator" [routerLinkActive]='["link-active"]'>
-            <a [routerLink]='["/fetch-data"]' (click)='collapse()'>
+            <a [routerLink]='["/manage/cources"]' (click)='collapse()'>
               <span class='glyphicon glyphicon-th-list'></span> Manage
             </a>
           </li>
+          <!--<li role="presentation" class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="nddManage" role="button" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Manage <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="nddManage">
+              <li>
+                <a class="dropdown-item" [routerLink]='["/manage/cources"]'>Cources</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Another action</a>
+              </li>
+              
+              <li role="separator" class="divider"></li>
+
+              <li>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </li>
+            </ul>
+          </li>-->
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <!--<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->

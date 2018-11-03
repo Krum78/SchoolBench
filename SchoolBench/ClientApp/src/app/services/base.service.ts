@@ -29,15 +29,4 @@ export class BaseService {
     console.error(errMsg);
     return Observable.throw(errMsg);
   }
-
-  public header() {
-
-    let header = new HttpHeaders({ 'Content-Type': 'application/json' });
-
-    //if (this.authHelper.isAuthenticated()) {
-    //  header = header.append('Authorization', 'Bearer ' + this.authHelper.getToken()); 
-    //}
-
-    return { headers: header };
-  }
 }

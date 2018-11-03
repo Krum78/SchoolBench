@@ -13,7 +13,7 @@ namespace SchoolBench.Api.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class ManageController : ControllerBase
+    public class ManageController : ControllerBase, IDisposable
     {
         private readonly IDbAccessService _dbAccess;
 
@@ -23,15 +23,49 @@ namespace SchoolBench.Api.Controllers
         }
 
         [HttpGet]
+        [Route("cources")]
         public async Task<ActionResult> GetCources()
         {
             return Ok(await _dbAccess.GetCources());
         }
 
-        [HttpPost]
-        public async Task<ActionResult> CreateCourse(CourseModel cource)
+        [HttpGet]
+        [Route("cources/{courseId}")]
+        public async Task<ActionResult> GetCourse(long courseId)
         {
-            return Ok(await _dbAccess.CreateCourse(cource));
+            return Ok(await _dbAccess.GetCourse(courseId));
+        }
+
+        [HttpDelete]
+        [Route("cources/{courseId}")]
+        public async Task<ActionResult> DeleteCourse(long courseId)
+        {
+            return Ok(await _dbAccess.DeleteCourse(courseId));
+        }
+
+        [HttpPut]
+        [Route("cources")]
+        public async Task<ActionResult> UpdateCourse(CourseModel course)
+        {
+            return Ok(await _dbAccess.UpdateCourse(course));
+        }
+
+        [HttpPost]
+        [Route("cources")]
+        public async Task<ActionResult> CreateCourse([FromBody] CourseModel course)
+        {
+            if (course == null)
+                return BadRequest();
+
+            course.PopulateServiceFields(Request.HttpContext);
+            
+            return Ok(await _dbAccess.CreateCourse(course));
+        }
+
+
+        public void Dispose()
+        {
+            _dbAccess?.Dispose();
         }
     }
 }

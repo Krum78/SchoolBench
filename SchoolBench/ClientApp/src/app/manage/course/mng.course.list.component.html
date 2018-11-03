@@ -1,0 +1,25 @@
+
+  <p *ngIf="!cources"><em>Loading...</em></p>
+
+  <div class="row" *ngIf="cources">
+    <button class="btn btn-sm btn-success pull-right" (click)="openAddCourseDialog()"><span class="glyphicon glyphicon-plus-sign"></span> Create New Course</button>
+  </div>
+
+  <div class="row">
+    <table class='table' *ngIf="cources">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let course of cources">
+          <td><a [routerLink]='["/manage/cources", course.id]'>{{ course.name }}</a></td>
+          <td>{{ course.description }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+

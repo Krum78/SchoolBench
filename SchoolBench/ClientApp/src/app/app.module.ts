@@ -1,12 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RouterModule } from '@angular/router';
 
-import { MatButtonModule, MatCheckboxModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 
 import { OAuthModule } from 'angular-oauth2-oidc';
 
@@ -19,11 +22,13 @@ import { MainApiClient } from "./services/main.api.client";
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { LogoutComponent } from './login/logout.component';
 import { LoginComponent } from './login/login.component';
-import { CallbackComponent } from "./login/oauth-callback"
+import { CallbackComponent } from './login/oauth-callback';
+import { ManageCourcesComponent } from './manage/course/mng.course.list.component';
+import { ManageCourseComponent } from './manage/course/mng.course.component';
+import { AddCourseDialog } from './manage/course/mng.addcourse.component';
 
 const appInitializerFn = (env: Environment) => {
   return () => {
@@ -41,26 +46,36 @@ const appInitializerFn = (env: Environment) => {
     CallbackComponent,
 
     HomeComponent,
-    CounterComponent,
+    ManageCourcesComponent,
+    ManageCourseComponent,
+    AddCourseDialog,
     FetchDataComponent
+  ],
+  entryComponents: [
+    AddCourseDialog
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     MatButtonModule,
     MatCheckboxModule,
     MatInputModule,
     MatFormFieldModule,
+    MatDialogModule,
+    MatIconModule,
     OAuthModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
 
       { path: 'logout', component: LogoutComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'oidc-callback', component: CallbackComponent},
+      { path: 'oidc-callback', component: CallbackComponent },
 
-      { path: 'counter', component: CounterComponent, canActivate: [AuthGuard] },
+      { path: 'manage/cources', component: ManageCourcesComponent, canActivate: [AuthGuard] },
+      { path: 'manage/cources/:id', component: ManageCourseComponent, canActivate: [AuthGuard] },
+
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthGuard] }
     ])
   ],
@@ -79,7 +94,12 @@ const appInitializerFn = (env: Environment) => {
       useFactory: appInitializerFn,
       multi: true,
       deps: [Environment]
-    }],
+    },
+    {
+      provide: MAT_DIALOG_DEFAULT_OPTIONS,
+      useValue: { hasBackdrop: true }
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

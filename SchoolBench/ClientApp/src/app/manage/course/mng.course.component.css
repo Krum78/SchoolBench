@@ -1,0 +1,7 @@
+#addNewCourseContent input, textarea {
+  width: 100%;
+}
+
+#newCourseDescr {
+  height: 300px;
+}
