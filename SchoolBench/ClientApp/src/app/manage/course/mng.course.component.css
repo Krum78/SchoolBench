@@ -5,3 +5,11 @@
 #newCourseDescr {
   height: 300px;
 }
+
+.course-list-item {
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+  border: 1px solid cornflowerblue;
+  margin: 5px 0px;
+  padding: 0px 10px;
+}

@@ -43,4 +43,18 @@ export class MainApiClient extends BaseService {
 
     return newCourse;
   }
+
+  public async updateCourse(course: CourseModel): Promise<CourseModel> {
+    let updatedCourse: CourseModel = await this.http.put<CourseModel>(this.apiUrl + 'manage/cources', course)
+      .pipe(catchError(super.handleError)).toPromise();
+
+    return updatedCourse;
+  }
+
+  public async deleteCourse(id: number): Promise<boolean> {
+    let response: boolean = await this.http.delete<boolean>(this.apiUrl + 'manage/cources/' + id)
+      .pipe(catchError(super.handleError)).toPromise();
+
+    return response;
+  }
 }

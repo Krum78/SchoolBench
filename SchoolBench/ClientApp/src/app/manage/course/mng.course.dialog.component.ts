@@ -4,14 +4,14 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CourseModel } from '../../models/course.model';
 
 @Component({
-  selector: 'dialog-add-course',
-  templateUrl: './mng.addcourse.component.html',
+  selector: 'dialog-course',
+  templateUrl: './mng.course.dialog.component.html',
   styleUrls: ['./mng.course.component.css']
 })
-export class AddCourseDialog {
+export class CourseDialog {
 
   constructor(
-    public dialogRef: MatDialogRef<AddCourseDialog>,
+    public dialogRef: MatDialogRef<CourseDialog>,
     @Inject(MAT_DIALOG_DATA) public data: CourseModel) { }
 
   onNoClick(): void {

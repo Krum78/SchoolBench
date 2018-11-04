@@ -45,7 +45,8 @@ namespace SchoolBench.Api.Services
 
         public async Task<CourseModel> UpdateCourse(CourseModel model)
         {
-            var track = _sbContext.Cources.Attach(Mapper.Map<CourseEntity>(model));
+            var track = _sbContext.Cources.Update(Mapper.Map<CourseEntity>(model));
+            
             await _sbContext.SaveChangesAsync();
             return Mapper.Map<CourseModel>(track.Entity);
         }

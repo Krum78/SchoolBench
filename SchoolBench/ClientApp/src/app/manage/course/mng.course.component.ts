@@ -6,7 +6,7 @@ import { switchMap } from 'rxjs/operators';
 import { MainApiClient } from '../../services/main.api.client';
 import { CourseModel } from '../../models/course.model';
 
-import { AddCourseDialog } from './mng.addcourse.component';
+import { CourseDialog } from './mng.course.dialog.component';
 
 @Component({
   selector: 'sb-course',
@@ -34,7 +34,7 @@ export class ManageCourseComponent implements OnInit {
   }
 
   openAddCourseDialog(): void {
-    const dialogRef = this.dialog.open(AddCourseDialog, {
+    const dialogRef = this.dialog.open(CourseDialog, {
       width: '600px',
       data: new CourseModel()
   });

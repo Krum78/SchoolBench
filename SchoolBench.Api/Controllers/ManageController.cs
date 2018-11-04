@@ -12,7 +12,7 @@ namespace SchoolBench.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = "ContentCreator, Teacher")]
     public class ManageController : ControllerBase, IDisposable
     {
         private readonly IDbAccessService _dbAccess;
@@ -38,6 +38,7 @@ namespace SchoolBench.Api.Controllers
 
         [HttpDelete]
         [Route("cources/{courseId}")]
+        [Authorize(Roles = "ContentCreator")]
         public async Task<ActionResult> DeleteCourse(long courseId)
         {
             return Ok(await _dbAccess.DeleteCourse(courseId));
@@ -45,6 +46,7 @@ namespace SchoolBench.Api.Controllers
 
         [HttpPut]
         [Route("cources")]
+        [Authorize(Roles = "ContentCreator")]
         public async Task<ActionResult> UpdateCourse(CourseModel course)
         {
             return Ok(await _dbAccess.UpdateCourse(course));
@@ -52,6 +54,7 @@ namespace SchoolBench.Api.Controllers
 
         [HttpPost]
         [Route("cources")]
+        [Authorize(Roles = "ContentCreator")]
         public async Task<ActionResult> CreateCourse([FromBody] CourseModel course)
         {
             if (course == null)

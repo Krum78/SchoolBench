@@ -28,7 +28,7 @@ import { LoginComponent } from './login/login.component';
 import { CallbackComponent } from './login/oauth-callback';
 import { ManageCourcesComponent } from './manage/course/mng.course.list.component';
 import { ManageCourseComponent } from './manage/course/mng.course.component';
-import { AddCourseDialog } from './manage/course/mng.addcourse.component';
+import { CourseDialog } from './manage/course/mng.course.dialog.component';
 
 const appInitializerFn = (env: Environment) => {
   return () => {
@@ -48,11 +48,11 @@ const appInitializerFn = (env: Environment) => {
     HomeComponent,
     ManageCourcesComponent,
     ManageCourseComponent,
-    AddCourseDialog,
+    CourseDialog,
     FetchDataComponent
   ],
   entryComponents: [
-    AddCourseDialog
+    CourseDialog
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

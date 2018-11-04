@@ -1,10 +1,14 @@
 
-  <p *ngIf="!course"><em>Loading...</em></p>
+<p *ngIf="!course"><em>Loading Course...</em></p>
 
-  <div class="row" *ngIf="course">
-    <label>{{course.name}}</label>
-    <label>{{course.description}}</label>
-  </div>
- 
+<div *ngIf="course">
+  <h2>Course: {{course.name}}</h2>
+  <p>{{course.description}}</p>
+</div>
+
+<div>
+  <p>List of course modules....</p>
+</div>
+
 
 

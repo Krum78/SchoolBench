@@ -23,7 +23,7 @@
               <span class='glyphicon glyphicon-education'></span> Counter
             </a>
           </li>
-          <li *ngIf="isAuthenticated && isUserCreator" [routerLinkActive]='["link-active"]'>
+          <li *ngIf="isAuthenticated && (isUserCreator || isUserTeacher)" [routerLinkActive]='["link-active"]'>
             <a [routerLink]='["/manage/cources"]' (click)='collapse()'>
               <span class='glyphicon glyphicon-th-list'></span> Manage
             </a>
