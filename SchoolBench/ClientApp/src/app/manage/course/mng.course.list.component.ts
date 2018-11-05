@@ -14,9 +14,9 @@ import { CourseDialog } from './mng.course.dialog.component';
   templateUrl: './mng.course.list.component.html',
   styleUrls: ['./mng.course.component.css']
 })
-export class ManageCourcesComponent implements OnInit {
+export class ManageCoursesComponent implements OnInit {
 
-  cources: CourseModel[];
+  courses: CourseModel[];
 
   dialogOrigModel: string;
 
@@ -26,7 +26,7 @@ export class ManageCourcesComponent implements OnInit {
 
   async ngOnInit() {
     this.title.setTitle("School Bench - Courses");
-    this.cources = await this.apiClient.getCources();
+    this.courses = await this.apiClient.getCourses();
   }
 
   openCourseDialog(model: CourseModel): void {
@@ -48,8 +48,8 @@ export class ManageCourcesComponent implements OnInit {
       if (result === undefined || result === null) {
         if (this.dialogOrigModel !== undefined && this.dialogOrigModel !== null) {
           let origModel = JSON.parse(this.dialogOrigModel) as CourseModel;
-          let indexToReplace = this.cources.findIndex(c => c.id === origModel.id);
-          this.cources[indexToReplace] = origModel;
+          let indexToReplace = this.courses.findIndex(c => c.id === origModel.id);
+          this.courses[indexToReplace] = origModel;
         }
 
         return;
@@ -59,14 +59,14 @@ export class ManageCourcesComponent implements OnInit {
         let updated = await this.apiClient.updateCourse(result);
       } else {
         let newCourse = await this.apiClient.postCourse(result);
-        this.cources.push(newCourse);
+        this.courses.push(newCourse);
       }
     });
   }
 
   deleteCourse(id: number) {
 
-    let localCourses = this.cources;
+    let localCourses = this.courses;
 
     this.apiClient.deleteCourse(id).then(function(r) {
       if (r) {

@@ -8,7 +8,7 @@
           <span class='icon-bar'></span>
           <span class='icon-bar'></span>
         </button>
-        <a class='navbar-brand' [routerLink]='["/"]'>SchoolBench</a>
+        <a class='navbar-brand' [routerLink]='["/"]'>School Bench</a>
       </div>
       <!--<div class='clearfix'></div>-->
       <div class='navbar-collapse collapse' [ngClass]='{ "in": isExpanded }'>
@@ -24,7 +24,7 @@
             </a>
           </li>
           <li *ngIf="auth.isAuthenticated && (auth.isUserCreator || auth.isUserTeacher)" [routerLinkActive]='["link-active"]'>
-            <a [routerLink]='["/manage/cources"]' (click)='collapse()'>
+            <a [routerLink]='["/manage/courses"]' (click)='collapse()'>
               <span class='glyphicon glyphicon-th-list'></span> Manage
             </a>
           </li>
@@ -34,7 +34,7 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="nddManage">
               <li>
-                <a class="dropdown-item" [routerLink]='["/manage/cources"]'>Cources</a>
+                <a class="dropdown-item" [routerLink]='["/manage/courses"]'>Courses</a>
               </li>
               <li>
                 <a class="dropdown-item" href="#">Another action</a>

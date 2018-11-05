@@ -23,21 +23,21 @@ namespace SchoolBench.Api.Controllers
         }
 
         [HttpGet]
-        [Route("cources")]
-        public async Task<ActionResult> GetCources()
+        [Route("courses")]
+        public async Task<ActionResult> GetCourses()
         {
-            return Ok(await _dbAccess.GetCources());
+            return Ok(await _dbAccess.GetCourses());
         }
 
         [HttpGet]
-        [Route("cources/{courseId}")]
+        [Route("courses/{courseId}")]
         public async Task<ActionResult> GetCourse(long courseId)
         {
             return Ok(await _dbAccess.GetCourse(courseId));
         }
 
         [HttpDelete]
-        [Route("cources/{courseId}")]
+        [Route("courses/{courseId}")]
         [Authorize(Roles = "ContentCreator")]
         public async Task<ActionResult> DeleteCourse(long courseId)
         {
@@ -45,7 +45,7 @@ namespace SchoolBench.Api.Controllers
         }
 
         [HttpPut]
-        [Route("cources")]
+        [Route("courses")]
         [Authorize(Roles = "ContentCreator")]
         public async Task<ActionResult> UpdateCourse(CourseModel course)
         {
@@ -53,7 +53,7 @@ namespace SchoolBench.Api.Controllers
         }
 
         [HttpPost]
-        [Route("cources")]
+        [Route("courses")]
         [Authorize(Roles = "ContentCreator")]
         public async Task<ActionResult> CreateCourse([FromBody] CourseModel course)
         {

@@ -26,7 +26,7 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { LogoutComponent } from './login/logout.component';
 import { LoginComponent } from './login/login.component';
 import { CallbackComponent } from './login/oauth-callback';
-import { ManageCourcesComponent } from './manage/course/mng.course.list.component';
+import { ManageCoursesComponent } from './manage/course/mng.course.list.component';
 import { ManageCourseComponent } from './manage/course/mng.course.component';
 import { CourseDialog } from './manage/course/mng.course.dialog.component';
 
@@ -46,7 +46,7 @@ const appInitializerFn = (env: Environment) => {
     CallbackComponent,
 
     HomeComponent,
-    ManageCourcesComponent,
+    ManageCoursesComponent,
     ManageCourseComponent,
     CourseDialog,
     FetchDataComponent
@@ -73,8 +73,8 @@ const appInitializerFn = (env: Environment) => {
       { path: 'login', component: LoginComponent },
       { path: 'oidc-callback', component: CallbackComponent },
 
-      { path: 'manage/cources', component: ManageCourcesComponent, canActivate: [AuthGuard] },
-      { path: 'manage/cources/:id', component: ManageCourseComponent, canActivate: [AuthGuard] },
+      { path: 'manage/courses', component: ManageCoursesComponent, canActivate: [AuthGuard] },
+      { path: 'manage/courses/:id', component: ManageCourseComponent, canActivate: [AuthGuard] },
 
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthGuard] }
     ])

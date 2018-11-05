@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SchoolBench.Repository.Entities
 {
-    [Table("Cources")]
+    [Table("Courses")]
     public class CourseEntity : EntityBase
     {
         [Required]

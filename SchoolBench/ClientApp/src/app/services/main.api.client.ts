@@ -23,36 +23,36 @@ export class MainApiClient extends BaseService {
     return user;
   }
 
-  public async getCources(): Promise<[CourseModel]> {
-    let cources: [CourseModel] = await this.http.get<[CourseModel]>(this.apiUrl + 'manage/cources')
+  public async getCourses(): Promise<[CourseModel]> {
+    let courses: [CourseModel] = await this.http.get<[CourseModel]>(this.apiUrl + 'manage/courses')
       .pipe(catchError(super.handleError)).toPromise();
 
-    return cources;
+    return courses;
   }
 
   public async getCourse(id: any): Promise<CourseModel> {
-    let course: CourseModel = await this.http.get<CourseModel>(this.apiUrl + 'manage/cources/' + id)
+    let course: CourseModel = await this.http.get<CourseModel>(this.apiUrl + 'manage/courses/' + id)
       .pipe(catchError(super.handleError)).toPromise();
 
     return course;
   }
 
   public async postCourse(course: CourseModel): Promise<CourseModel> {
-    let newCourse: CourseModel = await this.http.post<CourseModel>(this.apiUrl + 'manage/cources', course)
+    let newCourse: CourseModel = await this.http.post<CourseModel>(this.apiUrl + 'manage/courses', course)
       .pipe(catchError(super.handleError)).toPromise();
 
     return newCourse;
   }
 
   public async updateCourse(course: CourseModel): Promise<CourseModel> {
-    let updatedCourse: CourseModel = await this.http.put<CourseModel>(this.apiUrl + 'manage/cources', course)
+    let updatedCourse: CourseModel = await this.http.put<CourseModel>(this.apiUrl + 'manage/courses', course)
       .pipe(catchError(super.handleError)).toPromise();
 
     return updatedCourse;
   }
 
   public async deleteCourse(id: number): Promise<boolean> {
-    let response: boolean = await this.http.delete<boolean>(this.apiUrl + 'manage/cources/' + id)
+    let response: boolean = await this.http.delete<boolean>(this.apiUrl + 'manage/courses/' + id)
       .pipe(catchError(super.handleError)).toPromise();
 
     return response;
