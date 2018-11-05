@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -81,6 +81,7 @@ const appInitializerFn = (env: Environment) => {
   ],
   providers: [
     Environment,
+    Title,
     AuthHelper,
     MainApiClient,
     AuthGuard,

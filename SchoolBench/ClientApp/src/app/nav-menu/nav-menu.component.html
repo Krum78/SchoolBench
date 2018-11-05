@@ -18,12 +18,12 @@
               <span class='glyphicon glyphicon-home'></span> Home
             </a>
           </li>
-          <li *ngIf="isAuthenticated && isUserStudent" [routerLinkActive]='["link-active"]' >
+          <li *ngIf="auth.isAuthenticated && auth.isUserStudent" [routerLinkActive]='["link-active"]' >
             <a [routerLink]='["/counter"]' (click)='collapse()'>
               <span class='glyphicon glyphicon-education'></span> Counter
             </a>
           </li>
-          <li *ngIf="isAuthenticated && (isUserCreator || isUserTeacher)" [routerLinkActive]='["link-active"]'>
+          <li *ngIf="auth.isAuthenticated && (auth.isUserCreator || auth.isUserTeacher)" [routerLinkActive]='["link-active"]'>
             <a [routerLink]='["/manage/cources"]' (click)='collapse()'>
               <span class='glyphicon glyphicon-th-list'></span> Manage
             </a>
@@ -50,10 +50,10 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <!--<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->
-          <li *ngIf="!isAuthenticated" [routerLinkActive]='["link-active"]'>
+          <li *ngIf="!auth.isAuthenticated" [routerLinkActive]='["link-active"]'>
             <a [routerLink]='["/login"]' (click)='collapse()'><span class="glyphicon glyphicon-log-in"></span> Login</a>
           </li>
-          <li *ngIf="isAuthenticated">
+          <li *ngIf="auth.isAuthenticated">
             <a [routerLink]='["/logout"]'><span class="glyphicon glyphicon-log-out"></span> Logout</a>
           </li>
         </ul>

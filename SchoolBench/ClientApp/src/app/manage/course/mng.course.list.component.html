@@ -2,14 +2,14 @@
 <h1>Courses</h1>
 <p *ngIf="!cources"><em>Loading...</em></p>
 
-<div *ngIf="cources">
+<div *ngIf="cources && auth.isUserCreator">
   <button class="btn btn-sm btn-success pull-right" (click)="openCourseDialog()"><span class="glyphicon glyphicon-plus"></span> Create New Course</button>
 </div>
 
 <div class="clearfix"></div>
 
 <div *ngFor="let course of cources" class="course-list-item">
-  <div class="pull-right list-item-button-box">
+  <div *ngIf="auth.isUserCreator" class="pull-right list-item-button-box">
     <button type="button" class="btn btn-xs btn-primary" (click)="openCourseDialog(course)"><span class="glyphicon glyphicon-pencil"></span></button>
     <button type="button" class="btn btn-xs btn-danger" (click)="deleteCourse(course.id)"><span class="glyphicon glyphicon-trash"></span></button>
   </div>

@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!this.authHelper.isAuthenticated()) {
+    if (!this.authHelper.isAuthenticated) {
       this.authHelper.login();
     }
   }
