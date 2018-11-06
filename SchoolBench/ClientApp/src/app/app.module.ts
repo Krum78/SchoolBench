@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 import { OAuthModule } from 'angular-oauth2-oidc';
 
@@ -27,11 +28,13 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { LogoutComponent } from './login/logout.component';
 import { LoginComponent } from './login/login.component';
 import { CallbackComponent } from './login/oauth-callback';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 import { ManageCoursesComponent } from './manage/course/mng.course.list.component';
 import { ManageCourseComponent } from './manage/course/mng.course.component';
 import { CourseDialog } from './manage/course/mng.course.dialog.component';
 
+import { ManageModuleComponent } from './manage/module/mng.module.component';
 import { ManageModulesComponent } from './manage/module/mng.module.list.component';
 import { ModuleDialog } from './manage/module/mng.module.dialog.component';
 
@@ -50,6 +53,8 @@ const appInitializerFn = (env: Environment) => {
     LoginComponent,
     CallbackComponent,
 
+    BreadcrumbComponent,
+
     HomeComponent,
 
     ManageCoursesComponent,
@@ -57,6 +62,7 @@ const appInitializerFn = (env: Environment) => {
     CourseDialog,
 
     ManageModulesComponent,
+    ManageModuleComponent,
     ModuleDialog,
 
     FetchDataComponent
@@ -76,9 +82,11 @@ const appInitializerFn = (env: Environment) => {
     MatFormFieldModule,
     MatDialogModule,
     MatIconModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot(),
     OAuthModule.forRoot(),
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full', data: { breadcrumb: "Home" } },
+      { path: '', component: HomeComponent, pathMatch: 'full' },
 
       { path: 'logout', component: LogoutComponent },
       { path: 'login', component: LoginComponent },
@@ -87,7 +95,7 @@ const appInitializerFn = (env: Environment) => {
       { path: 'manage/courses', component: ManageCoursesComponent, canActivate: [AuthGuard], data: { breadcrumb: "Courses" } },
       { path: 'manage/courses/:id', component: ManageCourseComponent, canActivate: [AuthGuard], data: { breadcrumb: "Course - {{object.shortName}}" } },
 
-      { path: 'manage/courses/:courseId/modules/:id', component: FetchDataComponent, canActivate: [AuthGuard], data: { breadcrumb: "Module - name" } },
+      { path: 'manage/courses/:courseId/modules/:id', component: ManageModuleComponent, canActivate: [AuthGuard], data: { breadcrumb: "Module - name" } },
 
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthGuard] }
     ])

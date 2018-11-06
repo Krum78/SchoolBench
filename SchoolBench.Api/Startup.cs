@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using IdentityServer4.AccessTokenValidation;
@@ -81,7 +82,11 @@ namespace SchoolBench.Api
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<CourseModel, CourseEntity>().ReverseMap();
-                cfg.CreateMap<CourseModuleModel, CourseModuleEntity>().ReverseMap();
+
+                cfg.CreateMap<CourseModuleModel, CourseModuleEntity>()
+                .BeforeMap((m, e, ctx) => m.Data = Encoding.Unicode.GetBytes(m.Content ?? string.Empty))
+                .ReverseMap().AfterMap((e, m, ctx) => m.Content = Encoding.Unicode.GetString(m.Data));
+
                 cfg.CreateMap<ModuleTestModel, ModuleTestEntity>().ReverseMap();
                 cfg.CreateMap<TestItemModel, TestItemEntity>().ReverseMap();
                 cfg.CreateMap<TestItemOptionModel, TestItemOptionEntity>().ReverseMap();

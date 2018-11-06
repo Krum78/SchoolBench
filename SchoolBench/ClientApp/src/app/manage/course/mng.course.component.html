@@ -3,11 +3,13 @@
 
 <div *ngIf="course">
   <h2>Course: {{course.name}}</h2>
+  <hr />
   <p>{{course.description}}</p>
+  <hr />
 </div>
 
 <div>
-  <sb-module-list [data-course-model]="course">Loading course modules....</sb-module-list>
+  <sb-mng-module-list [data-course-model]="course">Loading course modules....</sb-mng-module-list>
 </div>
 
 

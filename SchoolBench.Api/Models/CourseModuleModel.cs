@@ -19,8 +19,8 @@ namespace SchoolBench.Api.Models
 
         [JsonIgnore]
         public byte[] Data {
-            get => Encoding.Unicode.GetBytes(_content??string.Empty);
-            set => _content = Encoding.Unicode.GetString(value);
+            get;
+            set;
         }
 
         public string Content { get; set; }

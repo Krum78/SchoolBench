@@ -1,0 +1,39 @@
+
+<p *ngIf="!module"><em>Loading Module...</em></p>
+
+<div *ngIf="module">
+  <div *ngIf="auth.isUserCreator" class="pull-right list-item-button-box">
+    <button type="button" class="btn btn-sm btn-primary" (click)="saveChanges()"><span class="glyphicon glyphicon-floppy-save"></span></button>
+  </div>
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#moduleTab" aria-controls="moduleTab" role="tab" data-toggle="tab">Module</a></li>
+    <li role="presentation"><a href="#editContent" aria-controls="editContent" role="tab" data-toggle="tab">Edit Content</a></li>
+    <li role="presentation"><a href="#moduleTests" aria-controls="moduleTests" role="tab" data-toggle="tab">Module Tests</a></li>
+  </ul>
+
+  <div class="tab-content">
+
+    <div role="tabpanel" class="tab-pane active" id="moduleTab">
+      <div>
+        
+        <h2><strong>Module:</strong> {{module.name}}</h2>
+        <hr />
+        <p>{{module.description}}</p>
+        <hr />
+        <h3><strong>Content Preview</strong></h3>
+        <hr />
+        <div [froalaView]="module.content"></div>
+      </div>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="editContent">
+      <div [froalaEditor] [(froalaModel)]="module.content"></div>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="moduleTests">
+      Tests list
+    </div>
+
+  </div>
+</div>
+

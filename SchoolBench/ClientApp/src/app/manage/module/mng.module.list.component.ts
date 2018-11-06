@@ -11,7 +11,7 @@ import { AuthHelper } from '../../services/auth.helper';
 import { ModuleDialog } from './mng.module.dialog.component';
 
 @Component({
-  selector: 'sb-module-list',
+  selector: 'sb-mng-module-list',
   templateUrl: './mng.module.list.component.html',
   styleUrls: ['./mng.module.component.css']
 })

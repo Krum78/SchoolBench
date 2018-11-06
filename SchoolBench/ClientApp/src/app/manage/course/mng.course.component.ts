@@ -10,7 +10,7 @@ import { CourseModel } from '../../models/course.model';
 import { CourseDialog } from './mng.course.dialog.component';
 
 @Component({
-  selector: 'sb-course',
+  selector: 'sb-mng-course',
   templateUrl: './mng.course.component.html',
   styleUrls: ['./mng.course.component.css']
 })
@@ -44,7 +44,7 @@ export class ManageCourseComponent implements OnInit {
         let id = params.get('id');
         console.log("Input id: " + id);
         this.course = await this.apiClient.getCourse(id);
-        this.title.setTitle("School Bench - Course: " + this.course.name.substr(0, 20));
+        this.title.setTitle("School Bench - Course: " + this.shortName);
       })).toPromise();
   }
 
