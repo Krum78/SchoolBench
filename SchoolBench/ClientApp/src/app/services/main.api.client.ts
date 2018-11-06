@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BaseService } from './base.service';
 import { User } from '../models/user';
 import { CourseModel } from '../models/course.model';
+import { CourseModuleModel } from '../models/course.module.model';
 import { Environment } from './environment'
 import { catchError, retry } from 'rxjs/operators';
 
@@ -23,6 +24,7 @@ export class MainApiClient extends BaseService {
     return user;
   }
 
+  //Courses - begin
   public async getCourses(): Promise<[CourseModel]> {
     let courses: [CourseModel] = await this.http.get<[CourseModel]>(this.apiUrl + 'manage/courses')
       .pipe(catchError(super.handleError)).toPromise();
@@ -57,4 +59,42 @@ export class MainApiClient extends BaseService {
 
     return response;
   }
+  //Courses - end
+
+  //Modules - begin
+  public async getModules(courseId: any): Promise<[CourseModuleModel]> {
+    let modules: [CourseModuleModel] = await this.http.get<[CourseModuleModel]>(this.apiUrl + 'manage/courses/' + courseId + '/modules')
+      .pipe(catchError(super.handleError)).toPromise();
+
+    return modules;
+  }
+
+  public async getModule(courseId: any, id: any): Promise<CourseModuleModel> {
+    let module: CourseModuleModel = await this.http.get<CourseModuleModel>(this.apiUrl + 'manage/courses/' + courseId + '/modules/' + id)
+      .pipe(catchError(super.handleError)).toPromise();
+
+    return module;
+  }
+
+  public async postModule(module: CourseModuleModel): Promise<CourseModuleModel> {
+    let newModule: CourseModuleModel = await this.http.post<CourseModuleModel>(this.apiUrl + 'manage/courses/' + module.courseId + '/modules', module)
+      .pipe(catchError(super.handleError)).toPromise();
+
+    return newModule;
+  }
+
+  public async updateModule(module: CourseModuleModel): Promise<CourseModuleModel> {
+    let updatedModule: CourseModuleModel = await this.http.put<CourseModuleModel>(this.apiUrl + 'manage/courses/' + module.courseId + '/modules', module)
+      .pipe(catchError(super.handleError)).toPromise();
+
+    return updatedModule;
+  }
+
+  public async deleteModule(courseId: number, id: number): Promise<boolean> {
+    let response: boolean = await this.http.delete<boolean>(this.apiUrl + 'manage/courses/' + courseId + '/modules/' + id)
+      .pipe(catchError(super.handleError)).toPromise();
+
+    return response;
+  }
+  //Modules - end
 }

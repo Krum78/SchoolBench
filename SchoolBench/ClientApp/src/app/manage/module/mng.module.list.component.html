@@ -1,0 +1,18 @@
+
+<h2>Modules</h2>
+<p *ngIf="!modules"><em>Loading...</em></p>
+
+<div *ngIf="modules && auth.isUserCreator">
+  <button class="btn btn-sm btn-success pull-right" (click)="openModuleDialog()"><span class="glyphicon glyphicon-plus"></span> Create New Module</button>
+</div>
+
+<div class="clearfix"></div>
+
+<div *ngFor="let module of modules" class="module-list-item">
+  <div *ngIf="auth.isUserCreator" class="pull-right list-item-button-box">
+    <button type="button" class="btn btn-xs btn-primary" (click)="openModuleDialog(module)"><span class="glyphicon glyphicon-pencil"></span></button>
+    <button type="button" class="btn btn-xs btn-danger" (click)="deleteModule(module.id)"><span class="glyphicon glyphicon-trash"></span></button>
+  </div>
+  <h3><a [routerLink]='["/manage/courses", courseModel.id, "modules", module.id]'>{{module.name}}</a></h3>
+  <p>{{module.description}}</p>
+</div>

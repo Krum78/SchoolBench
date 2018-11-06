@@ -1,11 +1,11 @@
 <h1 *ngIf="!data.id" mat-dialog-title>Create New Course</h1>
 <h1 *ngIf="data.id" mat-dialog-title>Edit Course</h1>
 <form #courseForm="ngForm">
-  <div mat-dialog-content id="addNewCourseContent">
+  <div mat-dialog-content id="editCourseContent">
 
     <div class="form-group">
-      <label for="newCourseName">Course Name</label>
-      <input matInput [(ngModel)]="data.name" name="name" required minlength="4" maxlength="150" #name="ngModel" id="newCourseName" placeholder="Enter course name">
+      <label for="editCourseName">Course Name</label>
+      <input matInput [(ngModel)]="data.name" name="name" required minlength="4" maxlength="150" #name="ngModel" id="editCourseName" placeholder="Enter course name">
       <div *ngIf="name.invalid && (name.dirty || name.touched)"
            class="alert alert-danger">
 
@@ -17,9 +17,9 @@
         </div>
       </div>
     </div>
-    <div class="form-group" id="newCourseDescrBlock">
-      <label for="newCourseDescr">Description</label>
-      <textarea matInput [(ngModel)]="data.description" name="description" id="newCourseDescr" placeholder="Describe course"></textarea>
+    <div class="form-group" id="editCourseDescrBlock">
+      <label for="editCourseDescr">Description</label>
+      <textarea matInput [(ngModel)]="data.description" name="description" id="editCourseDescr" placeholder="Describe course"></textarea>
     </div>
   </div>
   <div mat-dialog-actions class="dialog-actions">

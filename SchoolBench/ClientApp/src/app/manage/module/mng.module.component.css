@@ -1,12 +1,12 @@
-#editCourseContent input, textarea {
+#editModuleContent input, textarea {
   width: 100%;
 }
 
-#editCourseDescr {
+#editModuleDescr {
   height: 300px;
 }
 
-.course-list-item {
+.module-list-item {
   -ms-border-radius: 10px;
   border-radius: 10px;
   border: 1px solid cornflowerblue;

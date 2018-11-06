@@ -12,5 +12,10 @@ namespace SchoolBench.Api.Services
         Task<CourseModel> GetCourse(long id);
         Task<bool> DeleteCourse(long id);
         Task<CourseModel> UpdateCourse(CourseModel model);
+        Task<IEnumerable<CourseModuleModel>> GetCourseModules(long courseId);
+        Task<CourseModuleModel> GetCourseModule(long id);
+        Task<bool> DeleteCourseModule(long id);
+        Task<CourseModuleModel> UpdateCourseModule(CourseModuleModel model);
+        Task<CourseModuleModel> CreateCourseModule(CourseModuleModel model);
     }
 }

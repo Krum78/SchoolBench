@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
@@ -17,19 +18,33 @@ export class ManageCourseComponent implements OnInit {
 
   course: CourseModel;
 
-  constructor(private apiClient: MainApiClient, private dialog: MatDialog, private route: ActivatedRoute) {
+  get shortName(): string {
+    if (this.course === undefined || this.course === null)
+      return 'unknown';
+
+    if (!this.course.name)
+      return 'unknown';
+
+    if (this.course.name.length <= 10)
+      return this.course.name;
+
+    return this.course.name.substr(0, 10) + '...';
+  }
+
+  constructor(private apiClient: MainApiClient, private dialog: MatDialog, private route: ActivatedRoute, private title: Title) {
     
   }
 
   async ngOnInit() {
 
-    console.log("On Init enter");
+    this.title.setTitle("School Bench - Course: ");
 
     await this.route.paramMap.pipe(
       switchMap(async (params: ParamMap) => {
         let id = params.get('id');
         console.log("Input id: " + id);
         this.course = await this.apiClient.getCourse(id);
+        this.title.setTitle("School Bench - Course: " + this.course.name.substr(0, 20));
       })).toPromise();
   }
 

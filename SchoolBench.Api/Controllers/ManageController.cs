@@ -22,6 +22,7 @@ namespace SchoolBench.Api.Controllers
             _dbAccess = dbAccess;
         }
 
+        #region Courses
         [HttpGet]
         [Route("courses")]
         public async Task<ActionResult> GetCourses()
@@ -47,7 +48,7 @@ namespace SchoolBench.Api.Controllers
         [HttpPut]
         [Route("courses")]
         [Authorize(Roles = "ContentCreator")]
-        public async Task<ActionResult> UpdateCourse(CourseModel course)
+        public async Task<ActionResult> UpdateCourse([FromBody] CourseModel course)
         {
             return Ok(await _dbAccess.UpdateCourse(course));
         }
@@ -64,7 +65,55 @@ namespace SchoolBench.Api.Controllers
             
             return Ok(await _dbAccess.CreateCourse(course));
         }
+        #endregion
 
+        #region Modules
+        [HttpGet]
+        [Route("courses/{courseId}/modules")]
+        public async Task<ActionResult> GetModules(long courseId)
+        {
+            return Ok(await _dbAccess.GetCourseModules(courseId));
+        }
+
+        [HttpGet]
+        [Route("courses/{courseId}/modules/{moduleId}")]
+        public async Task<ActionResult> GetModule(long courseId, long moduleId)
+        {
+            return Ok(await _dbAccess.GetCourseModule(moduleId));
+        }
+
+        [HttpDelete]
+        [Route("courses/{courseId}/modules/{moduleId}")]
+        [Authorize(Roles = "ContentCreator")]
+        public async Task<ActionResult> DeleteModule(long courseId, long moduleId)
+        {
+            return Ok(await _dbAccess.DeleteCourseModule(moduleId));
+        }
+
+        [HttpPut]
+        [Route("courses/{courseId}/modules")]
+        [Authorize(Roles = "ContentCreator")]
+        public async Task<ActionResult> UpdateModule([FromBody]CourseModuleModel module, long courseId)
+        {
+            if (module.CourseId != courseId)
+                return BadRequest();
+
+            return Ok(await _dbAccess.UpdateCourseModule(module));
+        }
+
+        [HttpPost]
+        [Route("courses/{courseId}/modules")]
+        [Authorize(Roles = "ContentCreator")]
+        public async Task<ActionResult> CreateModule([FromBody] CourseModuleModel module, long courseId)
+        {
+            if (module == null || module.CourseId != courseId)
+                return BadRequest();
+
+            module.PopulateServiceFields(Request.HttpContext);
+
+            return Ok(await _dbAccess.CreateCourseModule(module));
+        }
+        #endregion
 
         public void Dispose()
         {

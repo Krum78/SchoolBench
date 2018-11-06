@@ -18,7 +18,7 @@ namespace SchoolBench.Api.Services
         {
             _sbContext = sbContext;
         }
-
+        #region Courses
         public async Task<IEnumerable<CourseModel>> GetCourses()
         {
             var courses = await _sbContext.Courses.ToListAsync();
@@ -57,6 +57,48 @@ namespace SchoolBench.Api.Services
             await _sbContext.SaveChangesAsync();
             return Mapper.Map<CourseModel>(track.Entity);
         }
+        #endregion
+
+        #region CourseModules
+        public async Task<IEnumerable<CourseModuleModel>> GetCourseModules(long courseId)
+        {
+            var modules = await _sbContext.CourseModules.Where(m => m.CourseId == courseId).ToListAsync();
+            return Mapper.Map<IEnumerable<CourseModuleModel>>(modules);
+        }
+
+        public async Task<CourseModuleModel> GetCourseModule(long id)
+        {
+            var module = await _sbContext.CourseModules.FindAsync(id);
+            return Mapper.Map<CourseModuleModel>(module);
+        }
+
+        public async Task<bool> DeleteCourseModule(long id)
+        {
+            var module = await _sbContext.CourseModules.FindAsync(id);
+            if (module != null)
+            {
+                _sbContext.CourseModules.Remove(module);
+                await _sbContext.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<CourseModuleModel> UpdateCourseModule(CourseModuleModel model)
+        {
+            var track = _sbContext.CourseModules.Update(Mapper.Map<CourseModuleEntity>(model));
+
+            await _sbContext.SaveChangesAsync();
+            return Mapper.Map<CourseModuleModel>(track.Entity);
+        }
+
+        public async Task<CourseModuleModel> CreateCourseModule(CourseModuleModel model)
+        {
+            var track = await _sbContext.CourseModules.AddAsync(Mapper.Map<CourseModuleEntity>(model));
+            await _sbContext.SaveChangesAsync();
+            return Mapper.Map<CourseModuleModel>(track.Entity);
+        }
+        #endregion
 
         public void Dispose()
         {

@@ -1,9 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text;
+using Newtonsoft.Json;
 
 namespace SchoolBench.Api.Models
 {
     public class CourseModuleModel : ModelBase
     {
+        private string _content;
+
         [Required]
         public long CourseId { get; set; }
 
@@ -13,7 +17,13 @@ namespace SchoolBench.Api.Models
 
         public string Description { get; set; }
 
-        public byte[] Data { get; set; }
+        [JsonIgnore]
+        public byte[] Data {
+            get => Encoding.Unicode.GetBytes(_content??string.Empty);
+            set => _content = Encoding.Unicode.GetString(value);
+        }
+
+        public string Content { get; set; }
 
         [MaxLength(500)]
         public string ContentLink { get; set; }

@@ -20,15 +20,20 @@ import { TokenInterceptor } from "./services/token.interceptor";
 import { MainApiClient } from "./services/main.api.client";
 
 import { AppComponent } from './app.component';
+
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { LogoutComponent } from './login/logout.component';
 import { LoginComponent } from './login/login.component';
 import { CallbackComponent } from './login/oauth-callback';
+
 import { ManageCoursesComponent } from './manage/course/mng.course.list.component';
 import { ManageCourseComponent } from './manage/course/mng.course.component';
 import { CourseDialog } from './manage/course/mng.course.dialog.component';
+
+import { ManageModulesComponent } from './manage/module/mng.module.list.component';
+import { ModuleDialog } from './manage/module/mng.module.dialog.component';
 
 const appInitializerFn = (env: Environment) => {
   return () => {
@@ -40,19 +45,25 @@ const appInitializerFn = (env: Environment) => {
   declarations: [
     AppComponent,
     NavMenuComponent,
-
+    
     LogoutComponent,
     LoginComponent,
     CallbackComponent,
 
     HomeComponent,
+
     ManageCoursesComponent,
     ManageCourseComponent,
     CourseDialog,
+
+    ManageModulesComponent,
+    ModuleDialog,
+
     FetchDataComponent
   ],
   entryComponents: [
-    CourseDialog
+    CourseDialog,
+    ModuleDialog
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -67,14 +78,16 @@ const appInitializerFn = (env: Environment) => {
     MatIconModule,
     OAuthModule.forRoot(),
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: HomeComponent, pathMatch: 'full', data: { breadcrumb: "Home" } },
 
       { path: 'logout', component: LogoutComponent },
       { path: 'login', component: LoginComponent },
       { path: 'oidc-callback', component: CallbackComponent },
 
-      { path: 'manage/courses', component: ManageCoursesComponent, canActivate: [AuthGuard] },
-      { path: 'manage/courses/:id', component: ManageCourseComponent, canActivate: [AuthGuard] },
+      { path: 'manage/courses', component: ManageCoursesComponent, canActivate: [AuthGuard], data: { breadcrumb: "Courses" } },
+      { path: 'manage/courses/:id', component: ManageCourseComponent, canActivate: [AuthGuard], data: { breadcrumb: "Course - {{object.shortName}}" } },
+
+      { path: 'manage/courses/:courseId/modules/:id', component: FetchDataComponent, canActivate: [AuthGuard], data: { breadcrumb: "Module - name" } },
 
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthGuard] }
     ])
