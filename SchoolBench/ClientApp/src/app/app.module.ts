@@ -28,7 +28,7 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { LogoutComponent } from './login/logout.component';
 import { LoginComponent } from './login/login.component';
 import { CallbackComponent } from './login/oauth-callback';
-import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { BreadcrumbComponent, BreadcrumbService } from './breadcrumb/breadcrumb.component';
 
 import { ManageCoursesComponent } from './manage/course/mng.course.list.component';
 import { ManageCourseComponent } from './manage/course/mng.course.component';
@@ -86,25 +86,26 @@ const appInitializerFn = (env: Environment) => {
     FroalaViewModule.forRoot(),
     OAuthModule.forRoot(),
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: HomeComponent, pathMatch: 'full', data: { breadcrumb: "Home" } },
 
       { path: 'logout', component: LogoutComponent },
       { path: 'login', component: LoginComponent },
       { path: 'oidc-callback', component: CallbackComponent },
 
-      { path: 'manage/courses', component: ManageCoursesComponent, canActivate: [AuthGuard], data: { breadcrumb: "Courses" } },
-      { path: 'manage/courses/:id', component: ManageCourseComponent, canActivate: [AuthGuard], data: { breadcrumb: "Course - {{object.shortName}}" } },
+      { path: 'manage/courses', component: ManageCoursesComponent, canActivate: [AuthGuard], data: { breadcrumb: "Manage - Courses" } },
+      { path: 'manage/courses/:id', component: ManageCourseComponent, canActivate: [AuthGuard], data: { breadcrumb: "Course - {{object.course.name}}" } },
 
       { path: 'manage/courses/:courseId/modules/:id', component: ManageModuleComponent, canActivate: [AuthGuard], data: { breadcrumb: "Module - name" } },
 
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthGuard] }
-    ])
+    ] , { onSameUrlNavigation: 'reload' })
   ],
   providers: [
     Environment,
     Title,
     AuthHelper,
     MainApiClient,
+    BreadcrumbService,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,

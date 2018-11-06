@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { MainApiClient } from '../../services/main.api.client';
 import { CourseModel } from '../../models/course.model';
+
+import { BreadcrumbService } from '../../breadcrumb/breadcrumb.component';
 
 import { AuthHelper } from '../../services/auth.helper';
 
@@ -20,12 +22,11 @@ export class ManageCoursesComponent implements OnInit {
 
   dialogOrigModel: string;
 
-  constructor(private apiClient: MainApiClient, private dialog: MatDialog, private authHelper: AuthHelper, private title: Title) {
-    
+  constructor(private apiClient: MainApiClient, private dialog: MatDialog, private authHelper: AuthHelper, private bc: BreadcrumbService) {
   }
 
   async ngOnInit() {
-    this.title.setTitle("School Bench - Courses");
+    this.bc.setTitle("Manage - Courses");
     this.courses = await this.apiClient.getCourses();
   }
 

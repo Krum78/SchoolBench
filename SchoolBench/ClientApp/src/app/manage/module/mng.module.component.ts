@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { BreadcrumbService } from '../../breadcrumb/breadcrumb.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
@@ -26,23 +26,23 @@ export class ManageModuleComponent implements OnInit {
     if (!this.module.name)
       return 'unknown';
 
-    if (this.module.name.length <= 10)
+    if (this.module.name.length <= 20)
       return this.module.name;
 
-    return this.module.name.substr(0, 10) + '...';
+    return this.module.name.substr(0, 20) + '...';
   }
 
   get auth(): AuthHelper {
     return this.authHelper;
   }
 
-  constructor(private apiClient: MainApiClient, private dialog: MatDialog, private route: ActivatedRoute, private authHelper: AuthHelper, private title: Title) {
+  constructor(private apiClient: MainApiClient, private dialog: MatDialog, private route: ActivatedRoute, private authHelper: AuthHelper, private title: BreadcrumbService) {
     
   }
 
   async ngOnInit() {
 
-    this.title.setTitle("School Bench - Course: ");
+    this.title.setTitle("Module: ");
 
     await this.route.paramMap.pipe(
       switchMap(async (params: ParamMap) => {
@@ -50,7 +50,7 @@ export class ManageModuleComponent implements OnInit {
         let id = params.get('id');
         console.log("Input id: " + id);
         this.module = await this.apiClient.getModule(courseId, id);
-        this.title.setTitle("School Bench - Module: " + this.shortName);
+        this.title.setTitle("Module: " + this.shortName);
       })).toPromise();
   }
 
