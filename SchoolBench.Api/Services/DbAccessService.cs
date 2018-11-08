@@ -100,6 +100,88 @@ namespace SchoolBench.Api.Services
         }
         #endregion
 
+        #region Module Tests
+        public async Task<IEnumerable<ModuleTestModel>> GetModuleTests(long moduleId)
+        {
+            var tests = await _sbContext.ModuleTests.Where(m => m.ModuleId == moduleId).ToListAsync();
+            return Mapper.Map<IEnumerable<ModuleTestModel>>(tests);
+        }
+
+        public async Task<ModuleTestModel> GetModuleTest(long id)
+        {
+            var test = await _sbContext.ModuleTests.FindAsync(id);
+            return Mapper.Map<ModuleTestModel>(test);
+        }
+
+        public async Task<bool> DeleteModuleTest(long id)
+        {
+            var test = await _sbContext.ModuleTests.FindAsync(id);
+            if (test != null)
+            {
+                _sbContext.ModuleTests.Remove(test);
+                await _sbContext.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<ModuleTestModel> UpdateModuleTest(ModuleTestModel model)
+        {
+            var track = _sbContext.ModuleTests.Update(Mapper.Map<ModuleTestEntity>(model));
+
+            await _sbContext.SaveChangesAsync();
+            return Mapper.Map<ModuleTestModel>(track.Entity);
+        }
+
+        public async Task<ModuleTestModel> CreateModuleTest(ModuleTestModel model)
+        {
+            var track = await _sbContext.ModuleTests.AddAsync(Mapper.Map<ModuleTestEntity>(model));
+            await _sbContext.SaveChangesAsync();
+            return Mapper.Map<ModuleTestModel>(track.Entity);
+        }
+        #endregion
+
+        #region Test Items
+        public async Task<IEnumerable<TestItemModel>> GetTestItems(long testId)
+        {
+            var tests = await _sbContext.TestItems.Where(m => m.TestId == testId).ToListAsync();
+            return Mapper.Map<IEnumerable<TestItemModel>>(tests);
+        }
+
+        public async Task<TestItemModel> GetTestItem(long id)
+        {
+            var test = await _sbContext.TestItems.FindAsync(id);
+            return Mapper.Map<TestItemModel>(test);
+        }
+
+        public async Task<bool> DeleteTestItem(long id)
+        {
+            var test = await _sbContext.TestItems.FindAsync(id);
+            if (test != null)
+            {
+                _sbContext.TestItems.Remove(test);
+                await _sbContext.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<TestItemModel> UpdateTestItem(TestItemModel model)
+        {
+            var track = _sbContext.TestItems.Update(Mapper.Map<TestItemEntity>(model));
+
+            await _sbContext.SaveChangesAsync();
+            return Mapper.Map<TestItemModel>(track.Entity);
+        }
+
+        public async Task<TestItemModel> CreateTestItem(TestItemModel model)
+        {
+            var track = await _sbContext.TestItems.AddAsync(Mapper.Map<TestItemEntity>(model));
+            await _sbContext.SaveChangesAsync();
+            return Mapper.Map<TestItemModel>(track.Entity);
+        }
+        #endregion
+
         public void Dispose()
         {
             _sbContext?.Dispose();

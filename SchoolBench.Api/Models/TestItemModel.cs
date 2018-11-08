@@ -15,6 +15,6 @@ namespace SchoolBench.Api.Models
         public TestItemType Type { get; set; }
 
         [Required]
-        public byte[] Question { get; set; }
+        public string Question { get; set; }
     }
 }

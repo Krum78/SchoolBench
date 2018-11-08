@@ -17,13 +17,7 @@ namespace SchoolBench.Api.Models
 
         public string Description { get; set; }
 
-        [JsonIgnore]
-        public byte[] Data {
-            get;
-            set;
-        }
-
-        public string Content { get; set; }
+        public string Data { get; set; }
 
         [MaxLength(500)]
         public string ContentLink { get; set; }

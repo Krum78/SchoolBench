@@ -81,12 +81,11 @@ namespace SchoolBench.Api
         {
             Mapper.Initialize(cfg =>
             {
+                cfg.CreateMap<string, byte[]>().ConvertUsing(s => Encoding.Unicode.GetBytes(s ?? string.Empty));
+                cfg.CreateMap<byte[], string>().ConvertUsing(bytes => Encoding.Unicode.GetString(bytes));
+
                 cfg.CreateMap<CourseModel, CourseEntity>().ReverseMap();
-
-                cfg.CreateMap<CourseModuleModel, CourseModuleEntity>()
-                .BeforeMap((m, e, ctx) => m.Data = Encoding.Unicode.GetBytes(m.Content ?? string.Empty))
-                .ReverseMap().AfterMap((e, m, ctx) => m.Content = Encoding.Unicode.GetString(m.Data));
-
+                cfg.CreateMap<CourseModuleModel, CourseModuleEntity>();
                 cfg.CreateMap<ModuleTestModel, ModuleTestEntity>().ReverseMap();
                 cfg.CreateMap<TestItemModel, TestItemEntity>().ReverseMap();
                 cfg.CreateMap<TestItemOptionModel, TestItemOptionEntity>().ReverseMap();

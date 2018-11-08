@@ -16,22 +16,22 @@
     <div role="tabpanel" class="tab-pane active" id="moduleTab">
       <div>
         
-        <h2><strong>Module:</strong> {{module.name}}</h2>
+        <h2><strong>{{module.name}}</strong></h2>
         <hr />
         <p>{{module.description}}</p>
         <hr />
         <h3><strong>Content Preview</strong></h3>
         <hr />
-        <div [froalaView]="module.content"></div>
+        <div [froalaView]="module.data"></div>
       </div>
     </div>
 
     <div role="tabpanel" class="tab-pane" id="editContent">
-      <div [froalaEditor] [(froalaModel)]="module.content"></div>
+      <div [froalaEditor] [(froalaModel)]="module.data"></div>
     </div>
 
     <div role="tabpanel" class="tab-pane" id="moduleTests">
-      Tests list
+      <sb-mng-test-list [data-module-model]="module">Loading module tests....</sb-mng-test-list>
     </div>
 
   </div>

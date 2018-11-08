@@ -38,6 +38,10 @@ import { ManageModuleComponent } from './manage/module/mng.module.component';
 import { ManageModulesComponent } from './manage/module/mng.module.list.component';
 import { ModuleDialog } from './manage/module/mng.module.dialog.component';
 
+import { ManageTestComponent } from './manage/test/mng.test.component';
+import { ManageTestsComponent } from './manage/test/mng.test.list.component';
+import { TestDialog } from './manage/test/mng.test.dialog.component';
+
 const appInitializerFn = (env: Environment) => {
   return () => {
     return env.loadConfiguration();
@@ -65,11 +69,16 @@ const appInitializerFn = (env: Environment) => {
     ManageModuleComponent,
     ModuleDialog,
 
+    ManageTestComponent,
+    ManageTestsComponent,
+    TestDialog,
+
     FetchDataComponent
   ],
   entryComponents: [
     CourseDialog,
-    ModuleDialog
+    ModuleDialog,
+    TestDialog
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -88,14 +97,16 @@ const appInitializerFn = (env: Environment) => {
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full', data: { breadcrumb: "Home" } },
 
-      { path: 'logout', component: LogoutComponent },
-      { path: 'login', component: LoginComponent },
+      { path: 'logout', component: LogoutComponent, data: { breadcrumb: "Log Out" }},
+      { path: 'login', component: LoginComponent, data: { breadcrumb: "Log In" }},
       { path: 'oidc-callback', component: CallbackComponent },
 
       { path: 'manage/courses', component: ManageCoursesComponent, canActivate: [AuthGuard], data: { breadcrumb: "Manage - Courses" } },
-      { path: 'manage/courses/:id', component: ManageCourseComponent, canActivate: [AuthGuard], data: { breadcrumb: "Course - {{object.course.name}}" } },
+      { path: 'manage/courses/:id', component: ManageCourseComponent, canActivate: [AuthGuard], data: { breadcrumb: "Course - " } },
 
-      { path: 'manage/courses/:courseId/modules/:id', component: ManageModuleComponent, canActivate: [AuthGuard], data: { breadcrumb: "Module - name" } },
+      { path: 'manage/courses/:courseId/modules/:id', component: ManageModuleComponent, canActivate: [AuthGuard], data: { breadcrumb: "Module - " } },
+
+      { path: 'manage/modules/:moduleId/tests/:id', component: ManageTestComponent, canActivate: [AuthGuard], data: { breadcrumb: "Test - " } },
 
       { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthGuard] }
     ] , { onSameUrlNavigation: 'reload' })

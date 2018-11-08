@@ -1,0 +1,17 @@
+
+<p *ngIf="!tests"><em>Loading...</em></p>
+
+<div *ngIf="tests && auth.isUserCreator" class="test-list-button-panel">
+  <button class="btn btn-sm btn-success pull-right" (click)="openTestDialog()"><span class="glyphicon glyphicon-plus"></span> Create New Test</button>
+</div>
+
+<div class="clearfix"></div>
+
+<div *ngFor="let test of tests" class="test-list-item">
+  <div *ngIf="auth.isUserCreator" class="pull-right list-item-button-box">
+    <button type="button" class="btn btn-xs btn-primary" (click)="openTestDialog(test)"><span class="glyphicon glyphicon-pencil"></span></button>
+    <button type="button" class="btn btn-xs btn-danger" (click)="deleteTest(test.id)"><span class="glyphicon glyphicon-trash"></span></button>
+  </div>
+  <h3><a [routerLink]='["/manage/modules", moduleModel.id, "tests", test.id]'>{{test.name}}</a></h3>
+  <p>{{test.description}}</p>
+</div>

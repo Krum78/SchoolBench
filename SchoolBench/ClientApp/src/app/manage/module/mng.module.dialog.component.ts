@@ -4,7 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CourseModuleModel } from '../../models/course.module.model';
 
 @Component({
-  selector: 'dialog-course',
+  selector: 'dialog-module',
   templateUrl: './mng.module.dialog.component.html',
   styleUrls: ['./mng.module.component.css']
 })

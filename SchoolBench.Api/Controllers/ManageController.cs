@@ -93,7 +93,7 @@ namespace SchoolBench.Api.Controllers
         [HttpPut]
         [Route("courses/{courseId}/modules")]
         [Authorize(Roles = "ContentCreator")]
-        public async Task<ActionResult> UpdateModule([FromBody]CourseModuleModel module, long courseId)
+        public async Task<ActionResult> UpdateModule([FromBody] CourseModuleModel module, long courseId)
         {
             if (module.CourseId != courseId)
                 return BadRequest();
@@ -112,6 +112,102 @@ namespace SchoolBench.Api.Controllers
             module.PopulateServiceFields(Request.HttpContext);
 
             return Ok(await _dbAccess.CreateCourseModule(module));
+        }
+        #endregion
+
+        #region Module Tests
+        [HttpGet]
+        [Route("modules/{moduleId}/tests")]
+        public async Task<ActionResult> GetTests(long moduleId)
+        {
+            return Ok(await _dbAccess.GetModuleTests(moduleId));
+        }
+
+        [HttpGet]
+        [Route("modules/{moduleId}/tests/{testId}")]
+        public async Task<ActionResult> GetTest(long testId)
+        {
+            return Ok(await _dbAccess.GetModuleTest(testId));
+        }
+
+        [HttpDelete]
+        [Route("modules/{moduleId}/tests/{testId}")]
+        [Authorize(Roles = "ContentCreator")]
+        public async Task<ActionResult> DeleteTest(long testId)
+        {
+            return Ok(await _dbAccess.DeleteModuleTest(testId));
+        }
+
+        [HttpPut]
+        [Route("modules/{moduleId}/tests")]
+        [Authorize(Roles = "ContentCreator")]
+        public async Task<ActionResult> UpdateTest([FromBody] ModuleTestModel test, long moduleId)
+        {
+            if (test.ModuleId != moduleId)
+                return BadRequest();
+
+            return Ok(await _dbAccess.UpdateModuleTest(test));
+        }
+
+        [HttpPost]
+        [Route("modules/{moduleId}/tests")]
+        [Authorize(Roles = "ContentCreator")]
+        public async Task<ActionResult> CreateTest([FromBody] ModuleTestModel test, long moduleId)
+        {
+            if (test == null || test.ModuleId != moduleId)
+                return BadRequest();
+
+            test.PopulateServiceFields(Request.HttpContext);
+
+            return Ok(await _dbAccess.CreateModuleTest(test));
+        }
+        #endregion
+
+        #region Test Items
+        [HttpGet]
+        [Route("tests/{testId}/items")]
+        public async Task<ActionResult> GetTestItems(long testId)
+        {
+            return Ok(await _dbAccess.GetTestItems(testId));
+        }
+
+        [HttpGet]
+        [Route("tests/{testId}/items/{itemId}")]
+        public async Task<ActionResult> GetTestItem(long itemId)
+        {
+            return Ok(await _dbAccess.GetTestItem(itemId));
+        }
+
+        [HttpDelete]
+        [Route("tests/{testId}/items/{itemId}")]
+        [Authorize(Roles = "ContentCreator")]
+        public async Task<ActionResult> DeleteTestItem(long itemId)
+        {
+            return Ok(await _dbAccess.DeleteTestItem(itemId));
+        }
+
+        [HttpPut]
+        [Route("tests/{testId}/items")]
+        [Authorize(Roles = "ContentCreator")]
+        public async Task<ActionResult> UpdateTestItem([FromBody] TestItemModel item, long testId)
+        {
+            if (item.TestId != testId)
+                return BadRequest();
+
+            return Ok(await _dbAccess.UpdateTestItem(item));
+        }
+
+        [HttpPost]
+        [Route("tests/{testId}/items")]
+        [Authorize(Roles = "ContentCreator")]
+        public async Task<ActionResult> CreateTest([FromBody] TestItemModel item, long testId)
+        {
+            if (item == null || item.TestId != testId)
+                return BadRequest();
+
+            item.PopulateServiceFields(Request.HttpContext);
+
+            return Ok(await _dbAccess.CreateTestItem(item));
         }
         #endregion
 

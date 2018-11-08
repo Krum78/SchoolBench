@@ -1,0 +1,13 @@
+
+<p *ngIf="!test"><em>Loading Test...</em></p>
+
+<div *ngIf="test">
+  <h2><strong>{{test.name}}</strong></h2>
+  <hr />
+  <p>{{test.description}}</p>
+  <hr />
+</div>
+
+<div *ngIf="test">
+  <!--<sb-mng-test-item-list [data-test-model]="test">Loading test items....</sb-mng-test-item-list>-->
+</div>
