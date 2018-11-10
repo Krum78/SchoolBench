@@ -4,3 +4,12 @@
     padding-top: 50px;
   }
 }
+
+.answer-radio-group {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.answer-radio-button {
+  margin: 5px;
+}

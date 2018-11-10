@@ -5,11 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RouterModule } from '@angular/router';
 
-import { MatButtonModule, MatCheckboxModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatRadioModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 import { OAuthModule } from 'angular-oauth2-oidc';
@@ -42,6 +43,12 @@ import { ManageTestComponent } from './manage/test/mng.test.component';
 import { ManageTestsComponent } from './manage/test/mng.test.list.component';
 import { TestDialog } from './manage/test/mng.test.dialog.component';
 
+import { ManageQuestionComponent } from './manage/question/mng.question.component';
+import { ManageQuestionsComponent } from './manage/question/mng.question.list.component';
+import { QuestionDialog } from './manage/question/mng.question.dialog.component';
+
+import { AnswerDialog } from './manage/answer/mng.answer.dialog.component';
+
 const appInitializerFn = (env: Environment) => {
   return () => {
     return env.loadConfiguration();
@@ -73,12 +80,20 @@ const appInitializerFn = (env: Environment) => {
     ManageTestsComponent,
     TestDialog,
 
+    ManageQuestionComponent,
+    ManageQuestionsComponent,
+    QuestionDialog,
+
+    AnswerDialog,
+
     FetchDataComponent
   ],
   entryComponents: [
     CourseDialog,
     ModuleDialog,
-    TestDialog
+    TestDialog,
+    QuestionDialog,
+    AnswerDialog
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -87,6 +102,7 @@ const appInitializerFn = (env: Environment) => {
     FormsModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatRadioModule,
     MatInputModule,
     MatFormFieldModule,
     MatDialogModule,

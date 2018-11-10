@@ -23,17 +23,17 @@ namespace SchoolBench.Repository
 
         public DbSet<ModuleTestEntity> ModuleTests { get; set; }
 
-        public DbSet<TestItemEntity> TestItems { get; set; }
+        public DbSet<QuestionEntity> Questions { get; set; }
 
-        public DbSet<TestItemOptionEntity> TestItemOptions { get; set; }
+        public DbSet<AnswerOptionEntity> AnswerOptions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CourseEntity>();
             modelBuilder.Entity<CourseModuleEntity>();
             modelBuilder.Entity<ModuleTestEntity>();
-            modelBuilder.Entity<TestItemEntity>();
-            modelBuilder.Entity<TestItemOptionEntity>();
+            modelBuilder.Entity<QuestionEntity>();
+            modelBuilder.Entity<AnswerOptionEntity>();
         }
     }
 }

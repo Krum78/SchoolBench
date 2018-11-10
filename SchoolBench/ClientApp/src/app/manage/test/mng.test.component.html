@@ -2,12 +2,16 @@
 <p *ngIf="!test"><em>Loading Test...</em></p>
 
 <div *ngIf="test">
-  <h2><strong>{{test.name}}</strong></h2>
-  <hr />
+  <div *ngIf="auth.isUserCreator" class="pull-right list-item-button-box">
+    <button type="button" class="btn btn-sm btn-primary" (click)="saveChanges()"><span class="glyphicon glyphicon-floppy-save"></span></button>
+  </div>
+  <h2><strong>{{test.name}}</strong>
+  </h2>
+  <hr/>
   <p>{{test.description}}</p>
-  <hr />
+  <hr/>
 </div>
 
 <div *ngIf="test">
-  <!--<sb-mng-test-item-list [data-test-model]="test">Loading test items....</sb-mng-test-item-list>-->
+  <sb-mng-question-list [data-test-model]="test">Loading questions....</sb-mng-question-list>
 </div>

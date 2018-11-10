@@ -5,7 +5,7 @@ import { User } from '../models/user';
 import { CourseModel } from '../models/course.model';
 import { CourseModuleModel } from '../models/course.module.model';
 import { ModuleTestModel } from '../models/module.test.model';
-import { TestItemModel } from '../models/test.item.model';
+import { QuestionModel } from '../models/question.model';
 import { Environment } from './environment'
 import { catchError, retry } from 'rxjs/operators';
 
@@ -137,40 +137,40 @@ export class MainApiClient extends BaseService {
   }
   //Tests - end
 
-  //Test Items - begin
-  public async getTestItems(testId: any): Promise<[TestItemModel]> {
-    let items: [TestItemModel] = await this.http.get<[TestItemModel]>(this.apiUrl + 'manage/tests/' + testId + '/items')
+  //Questions - begin
+  public async getQuestions(testId: any): Promise<[QuestionModel]> {
+    let items: [QuestionModel] = await this.http.get<[QuestionModel]>(this.apiUrl + 'manage/tests/' + testId + '/questions')
       .pipe(catchError(super.handleError)).toPromise();
 
     return items;
   }
 
-  public async getTestItem(testId: any, id: any): Promise<TestItemModel> {
-    let item: TestItemModel = await this.http.get<TestItemModel>(this.apiUrl + 'manage/tests/' + testId + '/items/' + id)
+  public async getQuestion(testId: any, id: any): Promise<QuestionModel> {
+    let item: QuestionModel = await this.http.get<QuestionModel>(this.apiUrl + 'manage/tests/' + testId + '/questions/' + id)
       .pipe(catchError(super.handleError)).toPromise();
 
     return item;
   }
 
-  public async postTestItem(item: TestItemModel): Promise<TestItemModel> {
-    let newTestItem: TestItemModel = await this.http.post<TestItemModel>(this.apiUrl + 'manage/tests/' + item.testId + '/items', item)
+  public async postQuestion(question: QuestionModel): Promise<QuestionModel> {
+    let newQuestion: QuestionModel = await this.http.post<QuestionModel>(this.apiUrl + 'manage/tests/' + question.testId + '/questions', question)
       .pipe(catchError(super.handleError)).toPromise();
 
-    return newTestItem;
+    return newQuestion;
   }
 
-  public async updateTestItem(item: TestItemModel): Promise<TestItemModel> {
-    let updatedTestItem: TestItemModel = await this.http.put<TestItemModel>(this.apiUrl + 'manage/tests/' + item.testId + '/items', item)
+  public async updateQuestion(question: QuestionModel): Promise<QuestionModel> {
+    let updatedQuestion: QuestionModel = await this.http.put<QuestionModel>(this.apiUrl + 'manage/tests/' + question.testId + '/questions', question)
       .pipe(catchError(super.handleError)).toPromise();
 
-    return updatedTestItem;
+    return updatedQuestion;
   }
 
-  public async deleteTestItem(testId: number, id: number): Promise<boolean> {
-    let response: boolean = await this.http.delete<boolean>(this.apiUrl + 'manage/tests/' + testId + '/items/' + id)
+  public async deleteQuestion(testId: number, id: number): Promise<boolean> {
+    let response: boolean = await this.http.delete<boolean>(this.apiUrl + 'manage/tests/' + testId + '/questions/' + id)
       .pipe(catchError(super.handleError)).toPromise();
 
     return response;
   }
-  //Test Items - end
+  //Questions - end
 }

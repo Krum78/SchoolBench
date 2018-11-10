@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using SchoolBench.Repository.Entities;
 
 namespace SchoolBench.Api.Models
 {
-    public class TestItemModel : ModelBase
+    public class QuestionModel : ModelBase
     {
         [Required]
         public long TestId { get; set; }
@@ -12,9 +13,10 @@ namespace SchoolBench.Api.Models
         public int ItemOrder { get; set; }
 
         [Required]
-        public TestItemType Type { get; set; }
+        public QuestionType Type { get; set; }
 
-        [Required]
         public string Question { get; set; }
+
+        public List<AnswerOptionModel> AnswerOptions { get; set; }
     }
 }

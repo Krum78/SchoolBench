@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { MainApiClient } from '../../services/main.api.client';
@@ -34,7 +33,7 @@ export class ManageTestsComponent implements OnInit {
 
   dialogOrigModel: string;
 
-  constructor(private apiClient: MainApiClient, private dialog: MatDialog, private authHelper: AuthHelper, private title: Title) {
+  constructor(private apiClient: MainApiClient, private dialog: MatDialog, private authHelper: AuthHelper) {
     
   }
 

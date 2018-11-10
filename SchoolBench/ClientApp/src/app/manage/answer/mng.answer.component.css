@@ -1,0 +1,19 @@
+#editAnswerObject input, textarea {
+  width: 100%;
+}
+
+#editTestDescr {
+  height: 300px;
+}
+
+.test-list-button-panel {
+  margin-top: 1em
+}
+
+.test-list-item {
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+  border: 1px solid cornflowerblue;
+  margin: 5px 0px;
+  padding: 0px 10px;
+}

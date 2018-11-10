@@ -2,19 +2,19 @@
 
 namespace SchoolBench.Api.Models
 {
-    public class TestItemOptionModel : ModelBase
+    public class AnswerOptionModel : ModelBase
     {
         [Required]
-        public long TestItemId { get; set; }
+        public long QuestionId { get; set; }
 
         [Required]
-        public short OptionOrder { get; set; }
+        public short ItemOrder { get; set; }
 
         [Required]
         [MaxLength(250)]
         public string Text { get; set; }
 
         [Required]
-        public bool CorrectOption { get; set; }
+        public bool IsCorrect { get; set; }
     }
 }

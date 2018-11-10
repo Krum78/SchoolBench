@@ -141,44 +141,44 @@ namespace SchoolBench.Api.Services
         }
         #endregion
 
-        #region Test Items
-        public async Task<IEnumerable<TestItemModel>> GetTestItems(long testId)
+        #region Questions
+        public async Task<IEnumerable<QuestionModel>> GetQuestions(long testId)
         {
-            var tests = await _sbContext.TestItems.Where(m => m.TestId == testId).ToListAsync();
-            return Mapper.Map<IEnumerable<TestItemModel>>(tests);
+            var tests = await _sbContext.Questions.Where(m => m.TestId == testId).Include(q => q.AnswerOptions).ToListAsync();
+            return Mapper.Map<IEnumerable<QuestionModel>>(tests);
         }
 
-        public async Task<TestItemModel> GetTestItem(long id)
+        public async Task<QuestionModel> GetQuestion(long id)
         {
-            var test = await _sbContext.TestItems.FindAsync(id);
-            return Mapper.Map<TestItemModel>(test);
+            var test = await _sbContext.Questions.Include(q => q.AnswerOptions).FirstOrDefaultAsync(q => q.Id == id);
+            return Mapper.Map<QuestionModel>(test);
         }
 
-        public async Task<bool> DeleteTestItem(long id)
+        public async Task<bool> DeleteQuestion(long id)
         {
-            var test = await _sbContext.TestItems.FindAsync(id);
+            var test = await _sbContext.Questions.FindAsync(id);
             if (test != null)
             {
-                _sbContext.TestItems.Remove(test);
+                _sbContext.Questions.Remove(test);
                 await _sbContext.SaveChangesAsync();
                 return true;
             }
             return false;
         }
 
-        public async Task<TestItemModel> UpdateTestItem(TestItemModel model)
+        public async Task<QuestionModel> UpdateQuestion(QuestionModel model)
         {
-            var track = _sbContext.TestItems.Update(Mapper.Map<TestItemEntity>(model));
+            var track = _sbContext.Questions.Update(Mapper.Map<QuestionEntity>(model));
 
             await _sbContext.SaveChangesAsync();
-            return Mapper.Map<TestItemModel>(track.Entity);
+            return Mapper.Map<QuestionModel>(track.Entity);
         }
 
-        public async Task<TestItemModel> CreateTestItem(TestItemModel model)
+        public async Task<QuestionModel> CreateQuestion(QuestionModel model)
         {
-            var track = await _sbContext.TestItems.AddAsync(Mapper.Map<TestItemEntity>(model));
+            var track = await _sbContext.Questions.AddAsync(Mapper.Map<QuestionEntity>(model));
             await _sbContext.SaveChangesAsync();
-            return Mapper.Map<TestItemModel>(track.Entity);
+            return Mapper.Map<QuestionModel>(track.Entity);
         }
         #endregion
 

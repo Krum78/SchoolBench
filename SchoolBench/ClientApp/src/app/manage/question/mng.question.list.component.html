@@ -1,0 +1,15 @@
+
+<p *ngIf="!questions"><em>Loading...</em></p>
+
+<div *ngIf="questions && auth.isUserCreator" class="question-list-button-panel">
+  <button class="btn btn-sm btn-success pull-right" (click)="createNewQuestion()"><span class="glyphicon glyphicon-plus"></span> Create New Question</button>
+</div>
+
+<div class="clearfix"></div>
+
+<div *ngFor="let question of questions" class="question-list-item">
+  <div *ngIf="auth.isUserCreator" class="pull-right list-item-button-box">
+    <button type="button" class="btn btn-xs btn-danger" (click)="deleteQuestion(question.id)"><span class="glyphicon glyphicon-trash"></span></button>
+  </div>
+  <sb-mng-question [question-model]="question"></sb-mng-question>
+</div>

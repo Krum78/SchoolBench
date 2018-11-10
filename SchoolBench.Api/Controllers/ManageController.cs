@@ -163,51 +163,51 @@ namespace SchoolBench.Api.Controllers
         }
         #endregion
 
-        #region Test Items
+        #region Questions
         [HttpGet]
-        [Route("tests/{testId}/items")]
-        public async Task<ActionResult> GetTestItems(long testId)
+        [Route("tests/{testId}/questions")]
+        public async Task<ActionResult> GetQuestions(long testId)
         {
-            return Ok(await _dbAccess.GetTestItems(testId));
+            return Ok(await _dbAccess.GetQuestions(testId));
         }
 
         [HttpGet]
-        [Route("tests/{testId}/items/{itemId}")]
-        public async Task<ActionResult> GetTestItem(long itemId)
+        [Route("tests/{testId}/questions/{questionId}")]
+        public async Task<ActionResult> GetQuestion(long questionId)
         {
-            return Ok(await _dbAccess.GetTestItem(itemId));
+            return Ok(await _dbAccess.GetQuestion(questionId));
         }
 
         [HttpDelete]
-        [Route("tests/{testId}/items/{itemId}")]
+        [Route("tests/{testId}/questions/{questionId}")]
         [Authorize(Roles = "ContentCreator")]
-        public async Task<ActionResult> DeleteTestItem(long itemId)
+        public async Task<ActionResult> DeleteQuestion(long questionId)
         {
-            return Ok(await _dbAccess.DeleteTestItem(itemId));
+            return Ok(await _dbAccess.DeleteQuestion(questionId));
         }
 
         [HttpPut]
-        [Route("tests/{testId}/items")]
+        [Route("tests/{testId}/questions")]
         [Authorize(Roles = "ContentCreator")]
-        public async Task<ActionResult> UpdateTestItem([FromBody] TestItemModel item, long testId)
+        public async Task<ActionResult> UpdateQuestion([FromBody] QuestionModel question, long testId)
         {
-            if (item.TestId != testId)
+            if (question.TestId != testId)
                 return BadRequest();
 
-            return Ok(await _dbAccess.UpdateTestItem(item));
+            return Ok(await _dbAccess.UpdateQuestion(question));
         }
 
         [HttpPost]
-        [Route("tests/{testId}/items")]
+        [Route("tests/{testId}/questions")]
         [Authorize(Roles = "ContentCreator")]
-        public async Task<ActionResult> CreateTest([FromBody] TestItemModel item, long testId)
+        public async Task<ActionResult> CreateQuestion([FromBody] QuestionModel question, long testId)
         {
-            if (item == null || item.TestId != testId)
+            if (question == null || question.TestId != testId)
                 return BadRequest();
 
-            item.PopulateServiceFields(Request.HttpContext);
+            question.PopulateServiceFields(Request.HttpContext);
 
-            return Ok(await _dbAccess.CreateTestItem(item));
+            return Ok(await _dbAccess.CreateQuestion(question));
         }
         #endregion
 

@@ -6,8 +6,8 @@ using System.Text;
 
 namespace SchoolBench.Repository.Entities
 {
-    [Table("TestItems")]
-    public class TestItemEntity : EntityBase
+    [Table("Questions")]
+    public class QuestionEntity : EntityBase
     {
         [Required]
         public long TestId { get; set; }
@@ -16,9 +16,12 @@ namespace SchoolBench.Repository.Entities
         public int ItemOrder { get; set; }
 
         [Required]
-        public TestItemType Type { get; set; }
+        public QuestionType Type { get; set; }
 
         [Required]
         public byte[] Question { get; set; }
+
+        [ForeignKey("QuestionId")]
+        public List<AnswerOptionEntity> AnswerOptions { get; set; }
     }
 }

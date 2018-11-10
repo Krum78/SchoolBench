@@ -1,0 +1,27 @@
+#editQuestionContent input, textarea {
+  width: 100%;
+}
+
+#editQuestionDescr {
+  height: 300px;
+}
+
+.question-list-button-panel .answer-list-button-panel {
+  margin-top: 1em
+}
+
+.question-list-item {
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+  border: 1px solid cornflowerblue;
+  margin: 5px 0px;
+  padding: 0px 10px;
+}
+
+.answer-list-item {
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+  border: 1px solid cornflowerblue;
+  margin: 5px 0px;
+  padding: 0px 10px;
+}

@@ -22,10 +22,10 @@ namespace SchoolBench.Api.Services
         Task<bool> DeleteModuleTest(long id);
         Task<ModuleTestModel> UpdateModuleTest(ModuleTestModel model);
         Task<ModuleTestModel> CreateModuleTest(ModuleTestModel model);
-        Task<IEnumerable<TestItemModel>> GetTestItems(long testId);
-        Task<TestItemModel> GetTestItem(long id);
-        Task<bool> DeleteTestItem(long id);
-        Task<TestItemModel> UpdateTestItem(TestItemModel model);
-        Task<TestItemModel> CreateTestItem(TestItemModel model);
+        Task<IEnumerable<QuestionModel>> GetQuestions(long testId);
+        Task<QuestionModel> GetQuestion(long id);
+        Task<bool> DeleteQuestion(long id);
+        Task<QuestionModel> UpdateQuestion(QuestionModel model);
+        Task<QuestionModel> CreateQuestion(QuestionModel model);
     }
 }

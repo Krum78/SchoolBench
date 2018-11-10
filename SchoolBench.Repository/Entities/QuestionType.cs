@@ -4,9 +4,9 @@ using System.Text;
 
 namespace SchoolBench.Repository.Entities
 {
-    public enum TestItemType
+    public enum QuestionType
     {
         SingleChoice = 1,
-        MultipleChoice = 2
+        MultipleChoices = 2
     }
 }

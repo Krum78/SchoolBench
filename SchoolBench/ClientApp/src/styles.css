@@ -13,3 +13,11 @@
 .list-item-button-box button {
   margin: 5px
 }
+
+div .tab-pane {
+  margin: 5px
+}
+
+.mat-checkbox-layout, .mat-radio-label {
+  white-space: normal !important
+}
