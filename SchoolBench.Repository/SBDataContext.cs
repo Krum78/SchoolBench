@@ -27,6 +27,8 @@ namespace SchoolBench.Repository
 
         public DbSet<AnswerOptionEntity> AnswerOptions { get; set; }
 
+        public DbSet<TestResultEntity> TestResults { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CourseEntity>();
@@ -34,6 +36,7 @@ namespace SchoolBench.Repository
             modelBuilder.Entity<ModuleTestEntity>();
             modelBuilder.Entity<QuestionEntity>();
             modelBuilder.Entity<AnswerOptionEntity>();
+            modelBuilder.Entity<TestResultEntity>();
         }
     }
 }

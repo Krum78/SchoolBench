@@ -67,6 +67,39 @@ namespace SchoolBench.Api.Controllers
         {
             return Ok(await _dbAccess.GetModuleTestForStudent(testId));
         }
+
+        [HttpPost]
+        [Route("test/results")]
+        public async Task<ActionResult> SubmitTestResults([FromBody] TestResultAnswers resultModel)
+        {
+            var test = await _dbAccess.GetModuleTest(resultModel.TestId);
+
+            var questionsWithAnswers = test.Questions.Where(q => q.AnswerOptions.Any(a => a.IsCorrect)).ToList();
+
+            var testResult = new TestResultModel
+            {
+                TestId = test.Id,
+                MaxScore = questionsWithAnswers.Count
+            };
+
+            testResult.PopulateServiceFields(Request.HttpContext);
+            
+            foreach (var question in questionsWithAnswers)
+            {
+                var correctIds = question.AnswerOptions.Where(a => a.IsCorrect).Select(a => a.Id).ToArray();
+                var userAnswers = resultModel.QuestionResults.FirstOrDefault(q => q.QuestionId == question.Id)?.SelectedAnswers.ToArray();
+
+                if(userAnswers == null || correctIds.Length != userAnswers.Length)
+                    continue;
+
+                var intersect = correctIds.Intersect(userAnswers).ToArray();
+
+                if (intersect.Length == correctIds.Length)
+                    testResult.Score++;
+            }
+
+            return Ok(await _dbAccess.SubmitTestResult(testResult));
+        }
         #endregion
 
         public void Dispose()

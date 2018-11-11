@@ -9,17 +9,26 @@
 </div>
 
 <div *ngIf="test">
-  <sb-question [question-model]="currentQuestion">Loading question....</sb-question>
-</div>
-<div *ngIf="currentQuestion">
-  <div *ngIf="previousAvailable" class="pull-left">
-    <button type="button" class="btn btn-sm btn-primary" (click)="showPreviousQuestion()"><span class="glyphicon glyphicon-arrow-left"></span> Previous</button>
-  </div>
-  <div *ngIf="nextAvailable" class="pull-right">
-    <button type="button" class="btn btn-sm btn-primary" (click)="showNextQuestion()"><span class="glyphicon glyphicon-arrow-right"></span> Next</button>
-  </div>
+  <div *ngIf="!testScore">
+    <div>
+      <sb-question [question-model]="currentQuestion">Loading question....</sb-question>
+    </div>
+    <div *ngIf="currentQuestion">
+      <div *ngIf="previousAvailable" class="pull-left">
+        <button type="button" class="btn btn-sm btn-primary" (click)="showPreviousQuestion()"><span class="glyphicon glyphicon-arrow-left"></span> Previous</button>
+      </div>
+      <div *ngIf="nextAvailable" class="pull-right">
+        <button type="button" class="btn btn-sm btn-primary" (click)="showNextQuestion()"><span class="glyphicon glyphicon-arrow-right"></span> Next</button>
+      </div>
 
-  <div *ngIf="!nextAvailable" class="pull-right">
-    <button type="button" class="btn btn-sm btn-success" (click)="submitResults()"><span class="glyphicon glyphicon-check"></span> Submit Test Results</button>
+      <div *ngIf="!nextAvailable" class="pull-right">
+        <button type="button" class="btn btn-sm btn-success" (click)="submitResults()"><span class="glyphicon glyphicon-check"></span> Submit Test Results</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="testScore">
+    <h1><strong>Your Score: {{testScore.score}} of {{testScore.maxScore}}</strong></h1>
   </div>
 </div>
+
+

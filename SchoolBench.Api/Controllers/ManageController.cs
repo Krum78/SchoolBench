@@ -223,6 +223,14 @@ namespace SchoolBench.Api.Controllers
         }
         #endregion
 
+        [HttpGet]
+        [Route("tests/{testId}/results")]
+        [Authorize(Roles = "Teacher")]
+        public async Task<ActionResult> GetTestResults(long testId)
+        {
+            return Ok(await _dbAccess.GetTestResults(testId));
+        }
+
         public void Dispose()
         {
             _dbAccess?.Dispose();

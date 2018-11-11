@@ -9,7 +9,7 @@ import { MatButtonModule, MatCheckboxModule, MatRadioModule, MAT_DIALOG_DEFAULT_
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
@@ -56,6 +56,8 @@ import { TestsComponent } from "./student/tests.component";
 import { TestComponent } from "./student/test.component";
 import { QuestionComponent } from "./student/question.component";
 
+import { ViewResultsComponent } from "./teacher/view.results.component";
+
 
 const appInitializerFn = (env: Environment) => {
   return () => {
@@ -100,7 +102,9 @@ const appInitializerFn = (env: Environment) => {
     ModuleComponent,
     TestsComponent,
     TestComponent,
-    QuestionComponent
+    QuestionComponent,
+
+    ViewResultsComponent
   ],
   entryComponents: [
     CourseDialog,
@@ -120,7 +124,7 @@ const appInitializerFn = (env: Environment) => {
     MatInputModule,
     MatFormFieldModule,
     MatDialogModule,
-    MatIconModule,
+    MatSelectModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
     OAuthModule.forRoot(),
@@ -135,6 +139,8 @@ const appInitializerFn = (env: Environment) => {
       { path: 'student/courses/:id', component: CourseComponent, canActivate: [AuthGuard], data: { breadcrumb: "Course - ", apiController: "student" } },
       { path: 'student/courses/:courseId/modules/:id', component: ModuleComponent, canActivate: [AuthGuard], data: { breadcrumb: "Module - ", apiController: "student" } },
       { path: 'student/modules/:moduleId/tests/:id', component: TestComponent, canActivate: [AuthGuard], data: { breadcrumb: "Test - ", apiController: "student" } },
+
+      { path: 'teacher/tests/results', component: ViewResultsComponent, canActivate: [AuthGuard], data: { breadcrumb: "Test Results", apiController: "manage" } },
 
       { path: 'manage/courses', component: ManageCoursesComponent, canActivate: [AuthGuard], data: { breadcrumb: "Manage - Courses", apiController: "manage" } },
       { path: 'manage/courses/:id', component: ManageCourseComponent, canActivate: [AuthGuard], data: { breadcrumb: "Course - ", apiController: "manage" } },

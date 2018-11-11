@@ -26,7 +26,7 @@ export class MainApiClient extends BaseService {
 
       const ROUTE_DATA_API_CONTROLLER: string = "apiController";
 
-      //set breadcrumbs
+      //set base API sub-root in order to use correct API resources
       let current: ActivatedRoute = this.activatedRoute;
       try {
         let snapshot = current.firstChild.snapshot;
@@ -170,6 +170,13 @@ export class MainApiClient extends BaseService {
 
     return response;
   }
+
+  public async submitTestResult(testResult: any): Promise<any> {
+    let testScore: any = await this.http.post<any>(this.apiUrl + 'student/test/results', testResult)
+      .pipe(catchError(super.handleError)).toPromise();
+
+    return testScore;
+  }
   //Tests - end
 
   //Questions - begin
@@ -208,4 +215,11 @@ export class MainApiClient extends BaseService {
     return response;
   }
   //Questions - end
+
+  public async getTestResults(testId: any): Promise<[any]> {
+    let items: [any] = await this.http.get<[any]>(this.apiUrl + this.apiSubRoot + '/tests/' + testId + '/results')
+      .pipe(catchError(super.handleError)).toPromise();
+
+    return items;
+  }
 }

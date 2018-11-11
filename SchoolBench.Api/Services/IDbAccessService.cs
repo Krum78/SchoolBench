@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using SchoolBench.Api.Models;
+using SchoolBench.Repository.Entities;
 
 namespace SchoolBench.Api.Services
 {
@@ -28,5 +29,7 @@ namespace SchoolBench.Api.Services
         Task<QuestionModel> UpdateQuestion(QuestionModel model);
         Task<QuestionModel> CreateQuestion(QuestionModel model);
         Task<ModuleTestModel> GetModuleTestForStudent(long id);
+        Task<TestResultModel> SubmitTestResult(TestResultModel result);
+        Task<List<TestResultModel>> GetTestResults(long testId);
     }
 }

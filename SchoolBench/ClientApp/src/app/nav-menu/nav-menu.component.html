@@ -18,10 +18,16 @@
               <span class='glyphicon glyphicon-home'></span> Home
             </a>
           </li>
-          
+
           <li *ngIf="auth.isAuthenticated" [routerLinkActive]='["link-active"]'>
             <a [routerLink]='["/student/courses"]' (click)='collapse()'>
               <span class='glyphicon glyphicon-education'></span> Courses
+            </a>
+          </li>
+
+          <li *ngIf="auth.isAuthenticated && auth.isUserTeacher" [routerLinkActive]='["link-active"]'>
+            <a [routerLink]='["/teacher/tests/results"]' (click)='collapse()'>
+              <span class='glyphicon glyphicon-stats'></span> Test Results
             </a>
           </li>
 

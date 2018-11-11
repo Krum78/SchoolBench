@@ -132,6 +132,20 @@ namespace SchoolBench.Api.Services
             return Mapper.Map<ModuleTestModel>(test);
         }
 
+        public async Task<TestResultModel> SubmitTestResult(TestResultModel result)
+        {
+            var track = await _sbContext.TestResults.AddAsync(Mapper.Map<TestResultEntity>(result));
+            await _sbContext.SaveChangesAsync();
+            return Mapper.Map<TestResultModel>(track.Entity);
+        }
+
+        public async Task<List<TestResultModel>> GetTestResults(long testId)
+        {
+            return Mapper.Map<List<TestResultModel>>(await _sbContext.TestResults.Where(r => r.TestId == testId)
+                .OrderBy(r => r.Creator).ThenByDescending(r => r.DateCreated)
+                .ToListAsync());
+        }
+
         private async Task<ModuleTestEntity> GetModuleTestNoTrack(long id)
         {
             return await _sbContext.ModuleTests.Include(t => t.Questions).ThenInclude(q => q.AnswerOptions).AsNoTracking().FirstOrDefaultAsync(t => t.Id == id);

@@ -18,6 +18,8 @@ export class TestComponent implements OnInit {
   test: ModuleTestModel;
   currentQuestion: QuestionModel;
 
+  testScore: any;
+
   get shortName(): string {
     if (this.test === undefined || this.test === null)
       return 'unknown';
@@ -75,7 +77,24 @@ export class TestComponent implements OnInit {
   }
 
   submitResults() {
-    
+    let resultModel = { TestId: this.test.id, QuestionResults: [] };
+    for (let i = 0; i < this.test.questions.length; i++) {
+      let question: QuestionModel = this.test.questions[i];
+      let questionResult = { QuestionId: question.id, SelectedAnswers: [] };
+
+      for (let j = 0; j < question.answerOptions.length; j++) {
+        if (question.answerOptions[j].isMarked) {
+          questionResult.SelectedAnswers.push(question.answerOptions[j].id);
+        }
+      }
+
+      resultModel.QuestionResults.push(questionResult);
+    }
+
+    this.apiClient.submitTestResult(resultModel).then(score => {
+      this.testScore = score;
+      console.dir(score);
+    });
   }
 
   get dataAvailable(): boolean {
