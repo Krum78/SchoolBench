@@ -8,7 +8,7 @@ namespace SchoolBench.Api.Models
         public long QuestionId { get; set; }
 
         [Required]
-        public short ItemOrder { get; set; }
+        public int ItemOrder { get; set; }
 
         [Required]
         [MaxLength(250)]

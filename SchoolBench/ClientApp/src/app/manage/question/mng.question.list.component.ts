@@ -1,13 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
-import { MainApiClient } from '../../services/main.api.client';
 import { QuestionModel } from '../../models/question.model';
+import { AnswerOptionModel } from '../../models/answer.option.model';
 import { ModuleTestModel } from '../../models/module.test.model';
 
 import { AuthHelper } from '../../services/auth.helper';
-
-import { QuestionDialog } from './mng.question.dialog.component';
 
 @Component({
   selector: 'sb-mng-question-list',
@@ -22,18 +19,19 @@ export class ManageQuestionsComponent implements OnInit {
   set testModel(value: ModuleTestModel) {
     if (this._testModel !== value) {
       this._testModel = value;
-      this.apiClient.getQuestions(this._testModel.id).then(r => this.questions = r);
     }
   }
   get testModel(): ModuleTestModel {
     return this._testModel;
   }
-  
-  questions: QuestionModel[];
+
+  get questions(): QuestionModel[] {
+    return this._testModel.questions;
+  }
 
   dialogOrigModel: string;
 
-  constructor(private apiClient: MainApiClient, private dialog: MatDialog, private authHelper: AuthHelper) {
+  constructor(private authHelper: AuthHelper) {
     
   }
 
@@ -41,60 +39,53 @@ export class ManageQuestionsComponent implements OnInit {
     
   }
 
-  async createNewQuestion() {
+  createNewQuestion() {
     let newQuestion: QuestionModel = new QuestionModel();
     newQuestion.testId = this.testModel.id;
+    newQuestion.type = 1;
+    newQuestion.question = "";
+    newQuestion.answerOptions = new Array<AnswerOptionModel>();
     newQuestion.itemOrder = this.questions.length + 1;
-    let created: QuestionModel = await this.apiClient.postQuestion(newQuestion);
-    this.questions.push(created);
+    this.questions.push(newQuestion);
   }
 
-  openQuestionDialog(model: QuestionModel): void {
+  deleteQuestion(question: QuestionModel) {
+    let indexToDelete = this._testModel.questions.indexOf(question);
 
-    let itemModel: QuestionModel = model;
+    if (indexToDelete < 0)
+      return;
 
-    if (itemModel === undefined || itemModel === null) {
-      itemModel = new QuestionModel();
-      itemModel.testId = this.testModel.id;
-    } else {
-      this.dialogOrigModel = JSON.stringify(itemModel);
+    this._testModel.questions.splice(indexToDelete, 1);
+
+    this.updateQuestionsOrder();
+  }
+
+  updateQuestionsOrder() {
+    for (let i = 0; i < this._testModel.questions.length; i++) {
+      this._testModel.questions[i].itemOrder = i + 1;
     }
-
-    const dialogRef = this.dialog.open(QuestionDialog, {
-      width: '600px',
-      data: itemModel
-    });
-
-    dialogRef.afterClosed().subscribe(async result => {
-      if (result === undefined || result === null) {
-        if (this.dialogOrigModel !== undefined && this.dialogOrigModel !== null) {
-          let origModel = JSON.parse(this.dialogOrigModel) as QuestionModel;
-          let indexToReplace = this.questions.findIndex(c => c.id === origModel.id);
-          this.questions[indexToReplace] = origModel;
-        }
-
-        return;
-      }
-
-      if (result.id > 0) {
-        let updated = await this.apiClient.updateQuestion(result);
-      } else {
-        let newModule = await this.apiClient.postQuestion(result);
-        this.questions.push(newModule);
-      }
-    });
   }
 
-  deleteQuestion(id: number) {
+  moveQuestionUp(question: QuestionModel) {
+    let indexToMove = this._testModel.questions.indexOf(question);
+    if (indexToMove <= 0)
+      return;
 
-    let localTests = this.questions;
+    this._testModel.questions.splice(indexToMove, 1);
+    this._testModel.questions.splice(indexToMove - 1, 0, question);
 
-    this.apiClient.deleteQuestion(this.testModel.id, id).then(function(r) {
-      if (r) {
-        let indexToDelete = localTests.findIndex(c => c.id === id);
-        localTests.splice(indexToDelete, 1);
-      }
-    });
+    this.updateQuestionsOrder();
+  }
+
+  moveQuestionDown(question: QuestionModel) {
+    let indexToMove = this._testModel.questions.indexOf(question);
+    if (indexToMove < 0 || indexToMove === this._testModel.questions.length - 1)
+      return;
+
+    this._testModel.questions.splice(indexToMove, 1);
+    this._testModel.questions.splice(indexToMove + 1, 0, question);
+
+    this.updateQuestionsOrder();
   }
 
   get auth(): AuthHelper {

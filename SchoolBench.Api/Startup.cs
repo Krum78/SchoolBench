@@ -87,8 +87,8 @@ namespace SchoolBench.Api
                 cfg.CreateMap<CourseModel, CourseEntity>().ReverseMap();
                 cfg.CreateMap<CourseModuleModel, CourseModuleEntity>();
                 cfg.CreateMap<ModuleTestModel, ModuleTestEntity>().ReverseMap();
-                cfg.CreateMap<QuestionModel, QuestionEntity>().ReverseMap();
-                cfg.CreateMap<AnswerOptionModel, AnswerOptionEntity>().ReverseMap();
+                cfg.CreateMap<QuestionModel, QuestionEntity>().ForMember(q => q.ModuleTest, c => c.Ignore()).ReverseMap();
+                cfg.CreateMap<AnswerOptionModel, AnswerOptionEntity>().ForMember(a => a.Question, c => c.Ignore()).ReverseMap();
             });
 
             Mapper.Configuration.AssertConfigurationIsValid();

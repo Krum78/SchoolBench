@@ -21,7 +21,10 @@ namespace SchoolBench.Repository.Entities
         [Required]
         public byte[] Question { get; set; }
 
-        [ForeignKey("QuestionId")]
+        [ForeignKey(nameof(TestId))]
+        public ModuleTestEntity ModuleTest { get; set; }
+
+        [ForeignKey(nameof(AnswerOptionEntity.QuestionId))]
         public List<AnswerOptionEntity> AnswerOptions { get; set; }
     }
 }

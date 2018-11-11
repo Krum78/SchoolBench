@@ -10,7 +10,7 @@ namespace SchoolBench.Repository.Entities
         public long QuestionId { get; set; }
 
         [Required]
-        public short ItemOrder { get; set; }
+        public int ItemOrder { get; set; }
 
         [Required]
         [MaxLength(250)]
@@ -18,5 +18,8 @@ namespace SchoolBench.Repository.Entities
 
         [Required]
         public bool IsCorrect { get; set; }
+
+        [ForeignKey(nameof(QuestionId))]
+        public QuestionEntity Question { get; set; }
     }
 }

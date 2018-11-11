@@ -7,7 +7,7 @@
   </div>
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#moduleTab" aria-controls="moduleTab" role="tab" data-toggle="tab">Module</a></li>
-    <li role="presentation"><a href="#editContent" aria-controls="editContent" role="tab" data-toggle="tab">Edit Content</a></li>
+    <li *ngIf="auth.isUserCreator" role="presentation"><a href="#editContent" aria-controls="editContent" role="tab" data-toggle="tab">Edit Content</a></li>
     <li role="presentation"><a href="#moduleTests" aria-controls="moduleTests" role="tab" data-toggle="tab">Module Tests</a></li>
   </ul>
 
@@ -26,7 +26,7 @@
       </div>
     </div>
 
-    <div role="tabpanel" class="tab-pane" id="editContent">
+    <div *ngIf="auth.isUserCreator" role="tabpanel" class="tab-pane" id="editContent">
       <div [froalaEditor] [(froalaModel)]="module.data"></div>
     </div>
 

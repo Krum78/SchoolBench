@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Transactions;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using SchoolBench.Api.Models;
@@ -109,8 +110,17 @@ namespace SchoolBench.Api.Services
 
         public async Task<ModuleTestModel> GetModuleTest(long id)
         {
-            var test = await _sbContext.ModuleTests.FindAsync(id);
+            var test = await _sbContext.ModuleTests.Include(t => t.Questions).ThenInclude(q => q.AnswerOptions).FirstOrDefaultAsync(t => t.Id == id);
+
+            test.Questions = test.Questions.OrderBy(q => q.ItemOrder).ToList();
+            test.Questions.ForEach(q => q.AnswerOptions = q.AnswerOptions.OrderBy(a => a.ItemOrder).ToList());
+
             return Mapper.Map<ModuleTestModel>(test);
+        }
+
+        private async Task<ModuleTestEntity> GetModuleTestNoTrack(long id)
+        {
+            return await _sbContext.ModuleTests.Include(t => t.Questions).ThenInclude(q => q.AnswerOptions).AsNoTracking().FirstOrDefaultAsync(t => t.Id == id);
         }
 
         public async Task<bool> DeleteModuleTest(long id)
@@ -127,10 +137,48 @@ namespace SchoolBench.Api.Services
 
         public async Task<ModuleTestModel> UpdateModuleTest(ModuleTestModel model)
         {
-            var track = _sbContext.ModuleTests.Update(Mapper.Map<ModuleTestEntity>(model));
+            using (TransactionScope ts = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            {
+                var original = await GetModuleTestNoTrack(model.Id);
 
-            await _sbContext.SaveChangesAsync();
-            return Mapper.Map<ModuleTestModel>(track.Entity);
+                var current = Mapper.Map<ModuleTestEntity>(model);
+
+                var testTrack = _sbContext.ModuleTests.Attach(current);
+                testTrack.State = EntityState.Modified;
+
+                if (current.Questions != null)
+                {
+                    var questionsToInsert = current.Questions.Where(q => q.Id == 0).ToList();
+                    questionsToInsert.ForEach(q =>
+                    {
+                        q.ModuleTest = testTrack.Entity;
+                    });
+
+                    if (original.Questions != null)
+                    {
+                        var origIds = original.Questions.Select(q => q.Id).ToList();
+                        var entIds = current.Questions.Select(q => q.Id).ToList();
+
+                        var toDelete = origIds.Except(entIds);
+                        var toUpdate = origIds.Intersect(entIds);
+
+                        foreach (var id in toDelete)
+                        {
+                            var t = _sbContext.Questions.Attach(original.Questions.First(q => q.Id == id));
+                            t.State = EntityState.Deleted;
+                        }
+                        
+                        await UpsertQuestions(current.Questions.Where(q => toUpdate.Contains(q.Id)).ToList(), original.Questions);
+                    }
+
+                    await UpsertQuestions(questionsToInsert, null);
+                }
+            
+                await _sbContext.SaveChangesAsync();
+                ts.Complete();
+            }
+
+            return Mapper.Map<ModuleTestModel>(await GetModuleTest(model.Id));
         }
 
         public async Task<ModuleTestModel> CreateModuleTest(ModuleTestModel model)
@@ -172,6 +220,64 @@ namespace SchoolBench.Api.Services
 
             await _sbContext.SaveChangesAsync();
             return Mapper.Map<QuestionModel>(track.Entity);
+        }
+
+        private async Task<bool> UpsertQuestions(List<QuestionEntity> questions, List<QuestionEntity> originalQuestions)
+        {
+            foreach (var questionEntity in questions)
+            {
+                if (questionEntity.Id < 0)
+                {
+                    var qTrack = await _sbContext.Questions.AddAsync(questionEntity);
+
+                    if(questionEntity.AnswerOptions == null)
+                        continue;
+
+                    foreach (var answerOption in questionEntity.AnswerOptions)
+                    {
+                        var answEntity = Mapper.Map<AnswerOptionEntity>(answerOption);
+                        answEntity.Question = qTrack.Entity;
+                        await _sbContext.AnswerOptions.AddAsync(answEntity);
+                    }
+                }
+                else
+                {
+                    if (questionEntity.AnswerOptions != null)
+                    {
+                        var original = originalQuestions.First(q => q.Id == questionEntity.Id);
+
+                        var origIds = original.AnswerOptions.Select(q => q.Id).ToList();
+                        var entIds = questionEntity.AnswerOptions?.Select(q => q.Id).ToList();
+
+                        var toDelete = origIds.Except(entIds);
+                        var toUpdate = origIds.Intersect(entIds);
+
+                        var deletedAnsw = original.AnswerOptions.Where(a => toDelete.Contains(a.Id)).ToList();
+                        deletedAnsw.ForEach(a =>
+                        {
+                            _sbContext.AnswerOptions.Attach(a).State = EntityState.Deleted;
+                        });
+
+                        var updatedAnsw = questionEntity.AnswerOptions.Where(a => toUpdate.Contains(a.Id)).ToList();
+                        updatedAnsw.ForEach(a =>
+                        {
+                            _sbContext.AnswerOptions.Attach(a).State = EntityState.Modified;
+                        });
+                    }
+                    var qTrack = _sbContext.Questions.Attach(questionEntity);
+                    qTrack.State = EntityState.Modified;
+
+                    var toInsert = questionEntity.AnswerOptions?.Where(a => a.Id < 0).ToList();
+
+                    if(toInsert == null)
+                        continue;
+
+                    toInsert.ForEach(a => a.Question = qTrack.Entity);
+                    await _sbContext.AnswerOptions.AddRangeAsync(toInsert);
+                }
+            }
+
+            return true;
         }
 
         public async Task<QuestionModel> CreateQuestion(QuestionModel model)

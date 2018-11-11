@@ -145,6 +145,18 @@ namespace SchoolBench.Api.Controllers
         {
             if (test.ModuleId != moduleId)
                 return BadRequest();
+            
+            test.Questions?.ForEach(q =>
+            {
+                if (q.Id == 0)
+                    q.PopulateServiceFields(Request.HttpContext);
+
+                q.AnswerOptions?.ForEach(a =>
+                {
+                    if (a.Id == 0)
+                        a.PopulateServiceFields(Request.HttpContext);
+                });
+            });
 
             return Ok(await _dbAccess.UpdateModuleTest(test));
         }

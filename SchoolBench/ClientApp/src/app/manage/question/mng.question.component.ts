@@ -72,4 +72,38 @@ export class ManageQuestionComponent implements OnInit {
       }
     });
   }
+
+  deleteAnswer(answer: AnswerOptionModel) {
+    let indexToDelete = this.question.answerOptions.indexOf(answer);
+    this.question.answerOptions.splice(indexToDelete, 1);
+    this.updateAnswersOrder();
+  }
+
+  updateAnswersOrder() {
+    for (let i = 0; i < this.question.answerOptions.length; i++) {
+      this.question.answerOptions[i].itemOrder = i + 1;
+    }
+  }
+
+  moveAnswerUp(answer: AnswerOptionModel) {
+    let indexToMove = this.question.answerOptions.indexOf(answer);
+    if (indexToMove <= 0)
+      return;
+
+    this.question.answerOptions.splice(indexToMove, 1);
+    this.question.answerOptions.splice(indexToMove - 1, 0, answer);
+
+    this.updateAnswersOrder();
+  }
+
+  moveAnswerDown(answer: AnswerOptionModel) {
+    let indexToMove = this.question.answerOptions.indexOf(answer);
+    if (indexToMove < 0 || indexToMove === this.question.answerOptions.length - 1)
+      return;
+
+    this.question.answerOptions.splice(indexToMove, 1);
+    this.question.answerOptions.splice(indexToMove + 1, 0, answer);
+
+    this.updateAnswersOrder();
+  }
 }

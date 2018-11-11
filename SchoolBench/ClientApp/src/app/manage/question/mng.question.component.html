@@ -1,8 +1,9 @@
 
 <div *ngIf="question">
-  <h3><strong>Question #{{question.itemOrder}} - {{typeString}}</strong></h3>
+  <h3><strong class="text-success">Question #{{question.itemOrder}} - {{typeString}}</strong></h3>
+  <hr *ngIf="!auth.isUserCreator"/>
 
-  <div>
+  <div *ngIf="auth.isUserCreator">
     <ul class="nav nav-tabs" role="tablist">
       <li role="presentation" class="active"><a href="#previewQuestionTab{{question.id}}" attr.aria-controls="previewQuestionTab{{question.id}}" role="tab" data-toggle="tab">Preview</a></li>
       <li role="presentation"><a href="#editQuestionTab{{question.id}}" attr.aria-controls="editQuestionTab{{question.id}}" role="tab" data-toggle="tab">Edit Question</a></li>
@@ -15,18 +16,22 @@
       <div [froalaView]="question.question"></div>
       <hr />
       <mat-radio-group *ngIf="question.type == 1" class="answer-radio-group">
-        <mat-radio-button *ngFor="let answer of question.answerOptions" class="answer-radio-button" [value]="answer">
-          {{answer.text}}
-        </mat-radio-button>
+        <div *ngFor="let answer of question.answerOptions" [class.bg-success]="answer.isCorrect">
+          <mat-radio-button class="answer-radio-button" [value]="answer">
+            {{answer.text}}
+          </mat-radio-button>
+        </div>
       </mat-radio-group>
       <div *ngIf="question.type == 2">
-        <mat-checkbox *ngFor="let answer of question.answerOptions" [labelPosition]="after">
-          {{answer.text}}
-        </mat-checkbox>
+        <div *ngFor="let answer of question.answerOptions"  [class.bg-success]="answer.isCorrect">
+          <mat-checkbox [labelPosition]="after">
+            {{answer.text}}
+          </mat-checkbox>
+        </div>
       </div>
     </div>
 
-    <div role="tabpanel" class="tab-pane" id="editQuestionTab{{question.id}}">
+    <div *ngIf="auth.isUserCreator" role="tabpanel" class="tab-pane" id="editQuestionTab{{question.id}}">
       <div class="form-inline">
         <div class="form-group" id="editQuestionTypeBlock">
           <div class="input-group">
@@ -42,7 +47,7 @@
       <div [froalaEditor] [(froalaModel)]="question.question"></div>
     </div>
 
-    <div role="tabpanel" class="tab-pane" id="answersTab{{question.id}}">
+    <div *ngIf="auth.isUserCreator" role="tabpanel" class="tab-pane" id="answersTab{{question.id}}">
       <div *ngIf="question.answerOptions && auth.isUserCreator" class="answer-list-button-panel">
         <button class="btn btn-sm btn-success pull-right" (click)="openAnswerDialog()"><span class="glyphicon glyphicon-plus"></span> Create Answer</button>
       </div>
@@ -52,11 +57,15 @@
       <mat-radio-group *ngIf="question.type == 1" class="answer-radio-group">
         <div *ngFor="let answer of question.answerOptions" class="answer-list-item">
           <div *ngIf="auth.isUserCreator" class="pull-right list-item-button-box">
+            <button type="button" class="btn btn-xs btn-info" (click)="moveAnswerUp(answer)"><span class="glyphicon glyphicon-arrow-up"></span></button>
+            <button type="button" class="btn btn-xs btn-info" (click)="moveAnswerDown(answer)"><span class="glyphicon glyphicon-arrow-down"></span></button>
+            <span> | </span>
             <button type="button" class="btn btn-xs btn-primary" (click)="openAnswerDialog(answer)"><span class="glyphicon glyphicon-pencil"></span></button>
             <button type="button" class="btn btn-xs btn-danger" (click)="deleteAnswer(answer)"><span class="glyphicon glyphicon-trash"></span></button>
           </div>
+          <h4><strong class="text-success">Option #{{answer.itemOrder}}</strong></h4>
           <div class="clearfix"></div>
-          <div>
+          <div [class.bg-success]="answer.isCorrect">
             <mat-radio-button class="answer-radio-button" [value]="answer">
               {{answer.text}}
             </mat-radio-button>
@@ -68,11 +77,15 @@
         <div *ngFor="let answer of question.answerOptions" class="answer-list-item">
           <div>
             <div *ngIf="auth.isUserCreator" class="pull-right list-item-button-box">
+              <button type="button" class="btn btn-xs btn-info" (click)="moveAnswerUp(answer)"><span class="glyphicon glyphicon-arrow-up"></span></button>
+              <button type="button" class="btn btn-xs btn-info" (click)="moveAnswerDown(answer)"><span class="glyphicon glyphicon-arrow-down"></span></button>
+              <span> | </span>
               <button type="button" class="btn btn-xs btn-primary" (click)="openAnswerDialog(answer)"><span class="glyphicon glyphicon-pencil"></span></button>
               <button type="button" class="btn btn-xs btn-danger" (click)="deleteAnswer(answer)"><span class="glyphicon glyphicon-trash"></span></button>
             </div>
+            <h4><strong class="text-success">Option #{{answer.itemOrder}}</strong></h4>
             <div class="clearfix"></div>
-            <div>
+            <div [class.bg-success]="answer.isCorrect">
               <mat-checkbox [labelPosition]="after">
                 {{answer.text}}
               </mat-checkbox>
@@ -80,6 +93,6 @@
           </div>
         </div>
       </div>
-      </div>
+    </div>
   </div>
 </div>

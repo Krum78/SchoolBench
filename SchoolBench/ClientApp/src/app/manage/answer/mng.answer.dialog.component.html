@@ -16,10 +16,10 @@
         </div>
       </div>
     </div>
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" [checked]="data.isCorrect" (change)="data.isCorrect = !data.isCorrect"> Correct choice
-      </label>
+    <div class="form-group">
+      <mat-checkbox [checked]="data.isCorrect" (change)="data.isCorrect = !data.isCorrect" [labelPosition]="after">
+        Correct choice
+      </mat-checkbox>
     </div>
   </div>
   <div mat-dialog-actions class="dialog-actions">
