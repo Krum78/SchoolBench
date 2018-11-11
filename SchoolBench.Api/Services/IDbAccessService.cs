@@ -27,5 +27,6 @@ namespace SchoolBench.Api.Services
         Task<bool> DeleteQuestion(long id);
         Task<QuestionModel> UpdateQuestion(QuestionModel model);
         Task<QuestionModel> CreateQuestion(QuestionModel model);
+        Task<ModuleTestModel> GetModuleTestForStudent(long id);
     }
 }

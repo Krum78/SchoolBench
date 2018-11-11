@@ -1,0 +1,8 @@
+
+<h2>Modules</h2>
+<p *ngIf="!modules"><em>Loading...</em></p>
+
+<div *ngFor="let module of modules" class="modules-item">
+  <h3><a [routerLink]='["/student/courses", courseModel.id, "modules", module.id]'>{{module.name}}</a></h3>
+  <p>{{module.description}}</p>
+</div>

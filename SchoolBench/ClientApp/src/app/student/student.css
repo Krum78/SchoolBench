@@ -1,0 +1,32 @@
+
+.courses-item {
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+  border: 1px solid cornflowerblue;
+  margin: 5px 0px;
+  padding: 0px 10px;
+}
+
+.modules-item {
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+  border: 1px solid cornflowerblue;
+  margin: 5px 0px;
+  padding: 0px 10px;
+}
+
+.tests-item {
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+  border: 1px solid cornflowerblue;
+  margin: 5px 0px;
+  padding: 0px 10px;
+}
+
+.question-panel {
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+  border: 1px solid cornflowerblue;
+  margin: 5px 0px;
+  padding: 0px 10px;
+}

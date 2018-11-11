@@ -18,35 +18,38 @@
               <span class='glyphicon glyphicon-home'></span> Home
             </a>
           </li>
-          <li *ngIf="auth.isAuthenticated && auth.isUserStudent" [routerLinkActive]='["link-active"]' >
-            <a [routerLink]='["/counter"]' (click)='collapse()'>
-              <span class='glyphicon glyphicon-education'></span> Counter
+          
+          <li *ngIf="auth.isAuthenticated" [routerLinkActive]='["link-active"]'>
+            <a [routerLink]='["/student/courses"]' (click)='collapse()'>
+              <span class='glyphicon glyphicon-education'></span> Courses
             </a>
           </li>
+
           <li *ngIf="auth.isAuthenticated && (auth.isUserCreator || auth.isUserTeacher)" [routerLinkActive]='["link-active"]'>
             <a [routerLink]='["/manage/courses"]' (click)='collapse()'>
               <span class='glyphicon glyphicon-th-list'></span> Manage
             </a>
           </li>
-          <!--<li role="presentation" class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="nddManage" role="button" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Manage <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="nddManage">
-              <li>
-                <a class="dropdown-item" [routerLink]='["/manage/courses"]'>Courses</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">Another action</a>
-              </li>
-              
-              <li role="separator" class="divider"></li>
 
-              <li>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </li>
-            </ul>
-          </li>-->
+          <!--<li role="presentation" class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" id="nddManage" role="button" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Manage <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nddManage">
+      <li>
+        <a class="dropdown-item" [routerLink]='["/manage/courses"]'>Courses</a>
+      </li>
+      <li>
+        <a class="dropdown-item" href="#">Another action</a>
+      </li>
+
+      <li role="separator" class="divider"></li>
+
+      <li>
+        <a class="dropdown-item" href="#">Something else here</a>
+      </li>
+    </ul>
+  </li>-->
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <!--<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->

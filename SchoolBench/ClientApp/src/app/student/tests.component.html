@@ -1,0 +1,6 @@
+<p *ngIf="!tests"><em>Loading...</em></p>
+
+<div *ngFor="let test of tests" class="tests-item">
+  <h3><a [routerLink]='["/student/modules", moduleModel.id, "tests", test.id]'>{{test.name}}</a></h3>
+  <p>{{test.description}}</p>
+</div>

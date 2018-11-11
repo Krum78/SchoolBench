@@ -1,0 +1,29 @@
+
+<p *ngIf="!module"><em>Loading Module...</em></p>
+
+<div *ngIf="module">
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#moduleTab" aria-controls="moduleTab" role="tab" data-toggle="tab">Module</a></li>
+    <li role="presentation"><a href="#moduleTests" aria-controls="moduleTests" role="tab" data-toggle="tab">Module Tests</a></li>
+  </ul>
+
+  <div class="tab-content">
+
+    <div role="tabpanel" class="tab-pane active" id="moduleTab">
+      <div>
+        
+        <h2><strong>{{module.name}}</strong></h2>
+        <hr />
+        <p>{{module.description}}</p>
+        <hr />
+        <div [froalaView]="module.data"></div>
+      </div>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="moduleTests">
+      <sb-test-list [data-module-model]="module">Loading module tests....</sb-test-list>
+    </div>
+
+  </div>
+</div>
+

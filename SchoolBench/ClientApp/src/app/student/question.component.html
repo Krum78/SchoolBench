@@ -1,0 +1,22 @@
+
+<div *ngIf="question" class="question-panel">
+  <h3><strong class="text-success">Question #{{question.itemOrder}} - {{typeString}}</strong></h3>
+  <hr />
+
+  <div [froalaView]="question.question"></div>
+  <hr />
+  <mat-radio-group *ngIf="question.type == 1" class="answer-radio-group" [(ngModel)]="selectedRadioValue">
+    <div *ngFor="let answer of question.answerOptions">
+      <mat-radio-button class="answer-radio-button" [value]="answer" >
+        {{answer.text}}
+      </mat-radio-button>
+    </div>
+  </mat-radio-group>
+  <div *ngIf="question.type == 2">
+    <div *ngFor="let answer of question.answerOptions">
+      <mat-checkbox [labelPosition]="after" [(ngModel)]="answer.isMarked">
+        {{answer.text}}
+      </mat-checkbox>
+    </div>
+  </div>
+</div>

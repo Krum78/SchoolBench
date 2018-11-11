@@ -25,7 +25,6 @@ import { AppComponent } from './app.component';
 
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { LogoutComponent } from './login/logout.component';
 import { LoginComponent } from './login/login.component';
 import { CallbackComponent } from './login/oauth-callback';
@@ -48,6 +47,15 @@ import { ManageQuestionsComponent } from './manage/question/mng.question.list.co
 import { QuestionDialog } from './manage/question/mng.question.dialog.component';
 
 import { AnswerDialog } from './manage/answer/mng.answer.dialog.component';
+
+import { CoursesComponent } from "./student/courses.component";
+import { CourseComponent } from "./student/course.component";
+import { ModulesComponent } from "./student/modules.component";
+import { ModuleComponent } from "./student/module.component";
+import { TestsComponent } from "./student/tests.component";
+import { TestComponent } from "./student/test.component";
+import { QuestionComponent } from "./student/question.component";
+
 
 const appInitializerFn = (env: Environment) => {
   return () => {
@@ -86,7 +94,13 @@ const appInitializerFn = (env: Environment) => {
 
     AnswerDialog,
 
-    FetchDataComponent
+    CoursesComponent,
+    CourseComponent,
+    ModulesComponent,
+    ModuleComponent,
+    TestsComponent,
+    TestComponent,
+    QuestionComponent
   ],
   entryComponents: [
     CourseDialog,
@@ -117,14 +131,17 @@ const appInitializerFn = (env: Environment) => {
       { path: 'login', component: LoginComponent, data: { breadcrumb: "Log In" }},
       { path: 'oidc-callback', component: CallbackComponent },
 
-      { path: 'manage/courses', component: ManageCoursesComponent, canActivate: [AuthGuard], data: { breadcrumb: "Manage - Courses" } },
-      { path: 'manage/courses/:id', component: ManageCourseComponent, canActivate: [AuthGuard], data: { breadcrumb: "Course - " } },
+      { path: 'student/courses', component: CoursesComponent, canActivate: [AuthGuard], data: { breadcrumb: "Courses", apiController: "student" } },
+      { path: 'student/courses/:id', component: CourseComponent, canActivate: [AuthGuard], data: { breadcrumb: "Course - ", apiController: "student" } },
+      { path: 'student/courses/:courseId/modules/:id', component: ModuleComponent, canActivate: [AuthGuard], data: { breadcrumb: "Module - ", apiController: "student" } },
+      { path: 'student/modules/:moduleId/tests/:id', component: TestComponent, canActivate: [AuthGuard], data: { breadcrumb: "Test - ", apiController: "student" } },
 
-      { path: 'manage/courses/:courseId/modules/:id', component: ManageModuleComponent, canActivate: [AuthGuard], data: { breadcrumb: "Module - " } },
+      { path: 'manage/courses', component: ManageCoursesComponent, canActivate: [AuthGuard], data: { breadcrumb: "Manage - Courses", apiController: "manage" } },
+      { path: 'manage/courses/:id', component: ManageCourseComponent, canActivate: [AuthGuard], data: { breadcrumb: "Course - ", apiController: "manage" } },
 
-      { path: 'manage/modules/:moduleId/tests/:id', component: ManageTestComponent, canActivate: [AuthGuard], data: { breadcrumb: "Test - " } },
+      { path: 'manage/courses/:courseId/modules/:id', component: ManageModuleComponent, canActivate: [AuthGuard], data: { breadcrumb: "Module - ", apiController: "manage" } },
 
-      { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthGuard] }
+      { path: 'manage/modules/:moduleId/tests/:id', component: ManageTestComponent, canActivate: [AuthGuard], data: { breadcrumb: "Test - ", apiController: "manage" } }
     ] , { onSameUrlNavigation: 'reload' })
   ],
   providers: [

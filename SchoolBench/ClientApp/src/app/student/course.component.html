@@ -1,0 +1,16 @@
+
+<p *ngIf="!course"><em>Loading Course...</em></p>
+
+<div *ngIf="course">
+  <h2><strong>{{course.name}}</strong></h2>
+  <hr />
+  <p>{{course.description}}</p>
+  <hr />
+</div>
+
+<div>
+  <sb-module-list [data-course-model]="course">Loading course modules....</sb-module-list>
+</div>
+
+
+

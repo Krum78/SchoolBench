@@ -1,0 +1,25 @@
+<p *ngIf="!test"><em>Loading Test...</em></p>
+
+<div *ngIf="test">
+  <h2><strong>{{test.name}}</strong>
+  </h2>
+  <hr/>
+  <p>{{test.description}}</p>
+  <hr/>
+</div>
+
+<div *ngIf="test">
+  <sb-question [question-model]="currentQuestion">Loading question....</sb-question>
+</div>
+<div *ngIf="currentQuestion">
+  <div *ngIf="previousAvailable" class="pull-left">
+    <button type="button" class="btn btn-sm btn-primary" (click)="showPreviousQuestion()"><span class="glyphicon glyphicon-arrow-left"></span> Previous</button>
+  </div>
+  <div *ngIf="nextAvailable" class="pull-right">
+    <button type="button" class="btn btn-sm btn-primary" (click)="showNextQuestion()"><span class="glyphicon glyphicon-arrow-right"></span> Next</button>
+  </div>
+
+  <div *ngIf="!nextAvailable" class="pull-right">
+    <button type="button" class="btn btn-sm btn-success" (click)="submitResults()"><span class="glyphicon glyphicon-check"></span> Submit Test Results</button>
+  </div>
+</div>

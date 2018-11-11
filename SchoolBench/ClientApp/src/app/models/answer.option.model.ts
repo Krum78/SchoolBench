@@ -6,4 +6,5 @@ export class AnswerOptionModel extends ModelBase {
   itemOrder: number;
   isCorrect: boolean;
   text: string;
+  isMarked: boolean;
 }
