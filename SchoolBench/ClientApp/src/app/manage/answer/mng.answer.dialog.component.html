@@ -4,7 +4,7 @@
 
     <div class="form-group">
       <label for="editAnswserText">Answer Text</label>
-      <input matInput [(ngModel)]="data.text" name="text" required minlength="4" maxlength="250" #text="ngModel" id="editAnswserText" placeholder="Enter answer text">
+      <input matInput [(ngModel)]="data.text" name="text" required minlength="1" maxlength="250" #text="ngModel" id="editAnswserText" placeholder="Enter answer text">
       <div *ngIf="text.invalid && (text.dirty || text.touched)"
            class="alert alert-danger">
 
@@ -12,7 +12,7 @@
           Text is required.
         </div>
         <div *ngIf="text.errors.minlength">
-          Text must be at least 4 characters long.
+          Text must be at least 1 characters long.
         </div>
       </div>
     </div>

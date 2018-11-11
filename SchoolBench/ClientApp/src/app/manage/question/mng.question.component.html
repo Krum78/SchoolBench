@@ -5,14 +5,14 @@
 
   <div *ngIf="auth.isUserCreator">
     <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#previewQuestionTab{{question.id}}" attr.aria-controls="previewQuestionTab{{question.id}}" role="tab" data-toggle="tab">Preview</a></li>
-      <li role="presentation"><a href="#editQuestionTab{{question.id}}" attr.aria-controls="editQuestionTab{{question.id}}" role="tab" data-toggle="tab">Edit Question</a></li>
-      <li role="presentation"><a href="#answersTab{{question.id}}" attr.aria-controls="answersTab{{question.id}}" role="tab" data-toggle="tab">Answer Options</a></li>
+      <li role="presentation" class="active"><a href="#previewQuestionTab{{question.itemOrder}}" attr.aria-controls="previewQuestionTab{{question.itemOrder}}" role="tab" data-toggle="tab">Preview</a></li>
+      <li role="presentation"><a href="#editQuestionTab{{question.itemOrder}}" attr.aria-controls="editQuestionTab{{question.itemOrder}}" role="tab" data-toggle="tab">Edit Question</a></li>
+      <li role="presentation"><a href="#answersTab{{question.itemOrder}}" attr.aria-controls="answersTab{{question.itemOrder}}" role="tab" data-toggle="tab">Answer Options</a></li>
     </ul>
   </div>
 
   <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="previewQuestionTab{{question.id}}">
+    <div role="tabpanel" class="tab-pane active" id="previewQuestionTab{{question.itemOrder}}">
       <div [froalaView]="question.question"></div>
       <hr />
       <mat-radio-group *ngIf="question.type == 1" class="answer-radio-group">
@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <div *ngIf="auth.isUserCreator" role="tabpanel" class="tab-pane" id="editQuestionTab{{question.id}}">
+    <div *ngIf="auth.isUserCreator" role="tabpanel" class="tab-pane" id="editQuestionTab{{question.itemOrder}}">
       <div class="form-inline">
         <div class="form-group" id="editQuestionTypeBlock">
           <div class="input-group">
@@ -47,7 +47,7 @@
       <div [froalaEditor] [(froalaModel)]="question.question"></div>
     </div>
 
-    <div *ngIf="auth.isUserCreator" role="tabpanel" class="tab-pane" id="answersTab{{question.id}}">
+    <div *ngIf="auth.isUserCreator" role="tabpanel" class="tab-pane" id="answersTab{{question.itemOrder}}">
       <div *ngIf="question.answerOptions && auth.isUserCreator" class="answer-list-button-panel">
         <button class="btn btn-sm btn-success pull-right" (click)="openAnswerDialog()"><span class="glyphicon glyphicon-plus"></span> Create Answer</button>
       </div>
