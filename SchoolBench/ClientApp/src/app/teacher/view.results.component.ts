@@ -30,6 +30,7 @@ export class ViewResultsComponent implements OnInit {
   set selectedCourse(value: CourseModel) {
     this.currentCourse = value;
     this.modules = new Array<CourseModuleModel>();
+    this.tests = new Array<ModuleTestModel>();
     this.results = null;
 
     if (this.currentCourse !== undefined && this.currentCourse !== null) {
