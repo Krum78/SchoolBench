@@ -80,7 +80,7 @@ namespace SchoolBench.IS4
 
             if (Environment.IsDevelopment())
             {
-                builder.AddDeveloperSigningCredential();
+                builder.AddDeveloperSigningCredential(true, "tempkey.rsa");
             }
             else
             {
