@@ -22,14 +22,14 @@ namespace SchoolBench
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
-                .AddIdentityServerAuthentication(options =>
-                {
-                    options.Authority = "https://localhost:44314";
-                    options.RequireHttpsMetadata = true;
-                    options.EnableCaching = true;
-                    options.ApiName = "api2";
-                });
+            //services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+            //    .AddIdentityServerAuthentication(options =>
+            //    {
+            //        options.Authority = "https://localhost:44314";
+            //        options.RequireHttpsMetadata = true;
+            //        options.EnableCaching = true;
+            //        options.ApiName = "api2";
+            //    });
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -51,7 +51,7 @@ namespace SchoolBench
                 app.UseHsts();
             }
 
-            app.UseAuthentication();
+            //app.UseAuthentication();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

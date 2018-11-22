@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using SchoolBench.Api.Extensions;
 using SchoolBench.Api.Models;
 using SchoolBench.Api.Services;
 using SchoolBench.Repository;
@@ -38,7 +39,7 @@ namespace SchoolBench.Api
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
                 .AddIdentityServerAuthentication(options =>
                 {
-                    options.Authority = "https://localhost:44314";
+                    options.Authority = Configuration.GetAuthorityUrl();
                     options.RequireHttpsMetadata = true;
                     options.EnableCaching = true;
                     options.ApiName = "api2";

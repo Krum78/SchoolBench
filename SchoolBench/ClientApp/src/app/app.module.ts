@@ -44,7 +44,6 @@ import { TestDialog } from './manage/test/mng.test.dialog.component';
 
 import { ManageQuestionComponent } from './manage/question/mng.question.component';
 import { ManageQuestionsComponent } from './manage/question/mng.question.list.component';
-import { QuestionDialog } from './manage/question/mng.question.dialog.component';
 
 import { AnswerDialog } from './manage/answer/mng.answer.dialog.component';
 
@@ -92,8 +91,7 @@ const appInitializerFn = (env: Environment) => {
 
     ManageQuestionComponent,
     ManageQuestionsComponent,
-    QuestionDialog,
-
+    
     AnswerDialog,
 
     CoursesComponent,
@@ -110,7 +108,6 @@ const appInitializerFn = (env: Environment) => {
     CourseDialog,
     ModuleDialog,
     TestDialog,
-    QuestionDialog,
     AnswerDialog
   ],
   imports: [

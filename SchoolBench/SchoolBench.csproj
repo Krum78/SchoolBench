@@ -10,6 +10,7 @@
 
     <!-- Set this to true if you enable server-side prerendering -->
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
+    <UserSecretsId>2a40138b-08a9-49e3-ad09-37f05d20a018</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -40,6 +41,10 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\login\logout.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\auth.guard.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
