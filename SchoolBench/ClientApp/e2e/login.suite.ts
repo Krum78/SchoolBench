@@ -4,7 +4,7 @@ import { LogInPage } from './login.po';
 export class LoginTestSuite {
 
   run() {
-    describe('Login test set',
+    describe('Login test suite',
       () => {
         let homePage: HomePage;
         let logInPage: LogInPage;

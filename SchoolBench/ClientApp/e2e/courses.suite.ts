@@ -4,7 +4,7 @@ import { CoursesPage } from './courses.po';
 export class CoursesTestSuite {
 
   run() {
-    describe('Login test set',
+    describe('Courses test suite',
       () => {
         let homePage: HomePage;
         let coursesPage: CoursesPage;
