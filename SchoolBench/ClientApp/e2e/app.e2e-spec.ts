@@ -1,14 +1,8 @@
-import { AppPage } from './app.po';
+import { LoginTestSuite } from './login.suite';
+import { CoursesTestSuite } from './courses.suite';
 
-describe('App', () => {
-  let page: AppPage;
+let ts1 = new LoginTestSuite();
+ts1.run();
 
-  beforeEach(() => {
-    page = new AppPage();
-  });
-
-  it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getMainHeading()).toEqual('Hello, world!');
-  });
-});
+let ts2 = new CoursesTestSuite();
+ts2.run();
