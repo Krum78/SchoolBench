@@ -1,5 +1,6 @@
 import { HomePage } from './home.po';
 import { CoursesPage } from './courses.po';
+import { LogOutPage } from "./logout.po";
 
 export class CoursesTestSuite {
 
@@ -8,10 +9,12 @@ export class CoursesTestSuite {
       () => {
         let homePage: HomePage;
         let coursesPage: CoursesPage;
+        let logOutPage: LogOutPage;
 
         beforeEach(() => {
           homePage = new HomePage();
           coursesPage = new CoursesPage();
+          logOutPage = new LogOutPage();
         });
 
         it('should be logged in',
@@ -29,6 +32,14 @@ export class CoursesTestSuite {
         it('list of courses loaded',
           () => {
             expect(coursesPage.isListLoaded());
+          }
+        );
+
+        it('Log out',
+          () => {
+            logOutPage.doLogOut();
+            logOutPage.doReturn();
+            expect(homePage.getMainHeading()).toEqual('Hello, world!');
           }
         );
       });
