@@ -3,6 +3,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SchoolBench.Api.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace SchoolBench.Api.Controllers
 {
@@ -12,7 +13,9 @@ namespace SchoolBench.Api.Controllers
     public class UserController : ControllerBase
     {
         [HttpGet]
-        public IActionResult Get()
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<User> Get()
         {
             if (Request.HttpContext?.User?.Identity is ClaimsIdentity identity)
             {

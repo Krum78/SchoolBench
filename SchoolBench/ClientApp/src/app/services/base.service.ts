@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { AuthHelper } from './auth.helper';
+import { throwError } from 'rxjs';
 
 @Injectable()
 export class BaseService {
@@ -27,6 +25,6 @@ export class BaseService {
     }
 
     console.error(errMsg);
-    return Observable.throw(errMsg);
+    return throwError(errMsg);
   }
 }

@@ -18,7 +18,7 @@ namespace SchoolBench.Repository.Entities
 
         public string Description { get; set; }
 
-        [ForeignKey(nameof(QuestionEntity.TestId))]
+        //[ForeignKey(nameof(QuestionEntity.TestId))]
         public List<QuestionEntity> Questions { get; set; }
     }
 }

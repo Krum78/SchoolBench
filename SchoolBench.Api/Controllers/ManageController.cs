@@ -25,14 +25,14 @@ namespace SchoolBench.Api.Controllers
         #region Courses
         [HttpGet]
         [Route("courses")]
-        public async Task<ActionResult> GetCourses()
+        public async Task<ActionResult<IEnumerable<CourseModel>>> GetCourses()
         {
             return Ok(await _dbAccess.GetCourses());
         }
 
         [HttpGet]
         [Route("courses/{courseId}")]
-        public async Task<ActionResult> GetCourse(long courseId)
+        public async Task<ActionResult<CourseModel>> GetCourse(long courseId)
         {
             return Ok(await _dbAccess.GetCourse(courseId));
         }
@@ -40,7 +40,7 @@ namespace SchoolBench.Api.Controllers
         [HttpDelete]
         [Route("courses/{courseId}")]
         [Authorize(Roles = "ContentCreator")]
-        public async Task<ActionResult> DeleteCourse(long courseId)
+        public async Task<ActionResult<bool>> DeleteCourse(long courseId)
         {
             return Ok(await _dbAccess.DeleteCourse(courseId));
         }
@@ -48,7 +48,7 @@ namespace SchoolBench.Api.Controllers
         [HttpPut]
         [Route("courses")]
         [Authorize(Roles = "ContentCreator")]
-        public async Task<ActionResult> UpdateCourse([FromBody] CourseModel course)
+        public async Task<ActionResult<CourseModel>> UpdateCourse([FromBody] CourseModel course)
         {
             return Ok(await _dbAccess.UpdateCourse(course));
         }
@@ -56,7 +56,9 @@ namespace SchoolBench.Api.Controllers
         [HttpPost]
         [Route("courses")]
         [Authorize(Roles = "ContentCreator")]
-        public async Task<ActionResult> CreateCourse([FromBody] CourseModel course)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<CourseModel>> CreateCourse([FromBody] CourseModel course)
         {
             if (course == null)
                 return BadRequest();
@@ -118,14 +120,14 @@ namespace SchoolBench.Api.Controllers
         #region Module Tests
         [HttpGet]
         [Route("modules/{moduleId}/tests")]
-        public async Task<ActionResult> GetTests(long moduleId)
+        public async Task<ActionResult<IEnumerable<ModuleTestModel>>> GetTests(long moduleId)
         {
             return Ok(await _dbAccess.GetModuleTests(moduleId));
         }
 
         [HttpGet]
         [Route("modules/{moduleId}/tests/{testId}")]
-        public async Task<ActionResult> GetTest(long testId)
+        public async Task<ActionResult<ModuleTestModel>> GetTest(long testId)
         {
             return Ok(await _dbAccess.GetModuleTest(testId));
         }
@@ -133,7 +135,7 @@ namespace SchoolBench.Api.Controllers
         [HttpDelete]
         [Route("modules/{moduleId}/tests/{testId}")]
         [Authorize(Roles = "ContentCreator")]
-        public async Task<ActionResult> DeleteTest(long testId)
+        public async Task<ActionResult<bool>> DeleteTest(long testId)
         {
             return Ok(await _dbAccess.DeleteModuleTest(testId));
         }
@@ -141,7 +143,9 @@ namespace SchoolBench.Api.Controllers
         [HttpPut]
         [Route("modules/{moduleId}/tests")]
         [Authorize(Roles = "ContentCreator")]
-        public async Task<ActionResult> UpdateTest([FromBody] ModuleTestModel test, long moduleId)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<ModuleTestModel>> UpdateTest([FromBody] ModuleTestModel test, long moduleId)
         {
             if (test.ModuleId != moduleId)
                 return BadRequest();
@@ -164,7 +168,9 @@ namespace SchoolBench.Api.Controllers
         [HttpPost]
         [Route("modules/{moduleId}/tests")]
         [Authorize(Roles = "ContentCreator")]
-        public async Task<ActionResult> CreateTest([FromBody] ModuleTestModel test, long moduleId)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<ModuleTestModel>> CreateTest([FromBody] ModuleTestModel test, long moduleId)
         {
             if (test == null || test.ModuleId != moduleId)
                 return BadRequest();
@@ -178,14 +184,14 @@ namespace SchoolBench.Api.Controllers
         #region Questions
         [HttpGet]
         [Route("tests/{testId}/questions")]
-        public async Task<ActionResult> GetQuestions(long testId)
+        public async Task<ActionResult<IEnumerable<QuestionModel>>> GetQuestions(long testId)
         {
             return Ok(await _dbAccess.GetQuestions(testId));
         }
 
         [HttpGet]
         [Route("tests/{testId}/questions/{questionId}")]
-        public async Task<ActionResult> GetQuestion(long questionId)
+        public async Task<ActionResult<QuestionModel>> GetQuestion(long questionId)
         {
             return Ok(await _dbAccess.GetQuestion(questionId));
         }
@@ -193,7 +199,7 @@ namespace SchoolBench.Api.Controllers
         [HttpDelete]
         [Route("tests/{testId}/questions/{questionId}")]
         [Authorize(Roles = "ContentCreator")]
-        public async Task<ActionResult> DeleteQuestion(long questionId)
+        public async Task<ActionResult<bool>> DeleteQuestion(long questionId)
         {
             return Ok(await _dbAccess.DeleteQuestion(questionId));
         }
@@ -201,7 +207,9 @@ namespace SchoolBench.Api.Controllers
         [HttpPut]
         [Route("tests/{testId}/questions")]
         [Authorize(Roles = "ContentCreator")]
-        public async Task<ActionResult> UpdateQuestion([FromBody] QuestionModel question, long testId)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<QuestionModel>> UpdateQuestion([FromBody] QuestionModel question, long testId)
         {
             if (question.TestId != testId)
                 return BadRequest();
@@ -212,7 +220,9 @@ namespace SchoolBench.Api.Controllers
         [HttpPost]
         [Route("tests/{testId}/questions")]
         [Authorize(Roles = "ContentCreator")]
-        public async Task<ActionResult> CreateQuestion([FromBody] QuestionModel question, long testId)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<QuestionModel>> CreateQuestion([FromBody] QuestionModel question, long testId)
         {
             if (question == null || question.TestId != testId)
                 return BadRequest();
@@ -226,7 +236,7 @@ namespace SchoolBench.Api.Controllers
         [HttpGet]
         [Route("tests/{testId}/results")]
         [Authorize(Roles = "Teacher")]
-        public async Task<ActionResult> GetTestResults(long testId)
+        public async Task<ActionResult<List<TestResultModel>>> GetTestResults(long testId)
         {
             return Ok(await _dbAccess.GetTestResults(testId));
         }

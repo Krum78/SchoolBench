@@ -24,14 +24,14 @@ namespace SchoolBench.Api.Controllers
         #region Courses
         [HttpGet]
         [Route("courses")]
-        public async Task<ActionResult> GetCourses()
+        public async Task<ActionResult<IEnumerable<CourseModel>>> GetCourses()
         {
             return Ok(await _dbAccess.GetCourses());
         }
 
         [HttpGet]
         [Route("courses/{courseId}")]
-        public async Task<ActionResult> GetCourse(long courseId)
+        public async Task<ActionResult<CourseModel>> GetCourse(long courseId)
         {
             return Ok(await _dbAccess.GetCourse(courseId));
         }
@@ -40,14 +40,14 @@ namespace SchoolBench.Api.Controllers
         #region Modules
         [HttpGet]
         [Route("courses/{courseId}/modules")]
-        public async Task<ActionResult> GetModules(long courseId)
+        public async Task<ActionResult<IEnumerable<CourseModuleModel>>> GetModules(long courseId)
         {
             return Ok(await _dbAccess.GetCourseModules(courseId));
         }
 
         [HttpGet]
         [Route("courses/{courseId}/modules/{moduleId}")]
-        public async Task<ActionResult> GetModule(long courseId, long moduleId)
+        public async Task<ActionResult<CourseModuleModel>> GetModule(long courseId, long moduleId)
         {
             return Ok(await _dbAccess.GetCourseModule(moduleId));
         }
@@ -56,21 +56,21 @@ namespace SchoolBench.Api.Controllers
         #region Module Tests
         [HttpGet]
         [Route("modules/{moduleId}/tests")]
-        public async Task<ActionResult> GetTests(long moduleId)
+        public async Task<ActionResult<IEnumerable<ModuleTestModel>>> GetTests(long moduleId)
         {
             return Ok(await _dbAccess.GetModuleTests(moduleId));
         }
 
         [HttpGet]
         [Route("modules/{moduleId}/tests/{testId}")]
-        public async Task<ActionResult> GetTest(long testId)
+        public async Task<ActionResult<ModuleTestModel>> GetTest(long testId)
         {
             return Ok(await _dbAccess.GetModuleTestForStudent(testId));
         }
 
         [HttpPost]
         [Route("test/results")]
-        public async Task<ActionResult> SubmitTestResults([FromBody] TestResultAnswers resultModel)
+        public async Task<ActionResult<TestResultModel>> SubmitTestResults([FromBody] TestResultAnswers resultModel)
         {
             var test = await _dbAccess.GetModuleTest(resultModel.TestId);
 

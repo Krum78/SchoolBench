@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthHelper } from './services/auth.helper';
-import { startWith, delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',

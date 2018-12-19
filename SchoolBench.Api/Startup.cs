@@ -91,7 +91,7 @@ namespace SchoolBench.Api
                 cfg.CreateMap<QuestionModel, QuestionEntity>().ForMember(q => q.ModuleTest, c => c.Ignore()).ReverseMap();
                 cfg.CreateMap<AnswerOptionModel, AnswerOptionEntity>().ForMember(a => a.Question, c => c.Ignore()).ReverseMap();
 
-                cfg.CreateMap<TestResultModel, TestResultEntity>().ReverseMap().ForMember(p => p.Percentage, c => c.ResolveUsing(r => (int)(r.Score / (double)r.MaxScore * 100)));
+                cfg.CreateMap<TestResultModel, TestResultEntity>().ReverseMap().ForMember(p => p.Percentage, c => c.MapFrom((src, t) => (int)(src.Score / (double)src.MaxScore * 100)));
             });
 
             Mapper.Configuration.AssertConfigurationIsValid();
