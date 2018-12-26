@@ -23,4 +23,10 @@
     <ProjectReference Include="..\SchoolBench.Repository\SchoolBench.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="IdentityServer4">
+      <HintPath>C:\Users\krum7\.nuget\packages\identityserver4\2.2.0\lib\netstandard2.0\IdentityServer4.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

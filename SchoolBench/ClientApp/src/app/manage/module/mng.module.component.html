@@ -15,19 +15,21 @@
 
     <div role="tabpanel" class="tab-pane active" id="moduleTab">
       <div>
-        
+
         <h2><strong>{{module.name}}</strong></h2>
         <hr />
         <p>{{module.description}}</p>
         <hr />
         <h3><strong>Content Preview</strong></h3>
         <hr />
-        <div [froalaView]="module.data"></div>
+        <!--<div [froalaView]="module.data"></div>-->
+        <div [innerHTML]="module.data | sanitizeHtml"></div>
       </div>
     </div>
 
     <div *ngIf="auth.isUserCreator" role="tabpanel" class="tab-pane" id="editContent">
-      <div [froalaEditor] [(froalaModel)]="module.data"></div>
+      <!--<div [froalaEditor] [(froalaModel)]="module.data"></div>-->
+      <tyni-editor [(model)]="module.data"></tyni-editor>
     </div>
 
     <div role="tabpanel" class="tab-pane" id="moduleTests">

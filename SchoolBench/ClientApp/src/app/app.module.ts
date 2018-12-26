@@ -1,6 +1,6 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { NgModule, APP_INITIALIZER, Injector } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RouterModule } from '@angular/router';
@@ -11,15 +11,19 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 
+import { EditorModule } from '@tinymce/tinymce-angular';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 import { OAuthModule } from 'angular-oauth2-oidc';
 
+import { ServiceLocator } from "./services/locator.service";
 import { AuthHelper } from "./services/auth.helper";
 import { AuthGuard } from "./services/auth.guard";
 import { Environment } from "./services/environment";
 import { TokenInterceptor } from "./services/token.interceptor";
 import { MainApiClient } from "./services/main.api.client";
+
+import { SanitizeHtmlPipe } from "./pipes/sanitize.html";
 
 import { AppComponent } from './app.component';
 
@@ -29,6 +33,8 @@ import { LogoutComponent } from './login/logout.component';
 import { LoginComponent } from './login/login.component';
 import { CallbackComponent } from './login/oauth-callback';
 import { BreadcrumbComponent, BreadcrumbService } from './breadcrumb/breadcrumb.component';
+
+import { TinyEditor } from './editor/tiny.editor';
 
 import { ManageCoursesComponent } from './manage/course/mng.course.list.component';
 import { ManageCourseComponent } from './manage/course/mng.course.component';
@@ -57,7 +63,6 @@ import { QuestionComponent } from "./student/question.component";
 
 import { ViewResultsComponent } from "./teacher/view.results.component";
 
-
 const appInitializerFn = (env: Environment) => {
   return () => {
     return env.loadConfiguration();
@@ -66,6 +71,8 @@ const appInitializerFn = (env: Environment) => {
 
 @NgModule({
   declarations: [
+    SanitizeHtmlPipe,
+
     AppComponent,
     NavMenuComponent,
     
@@ -74,6 +81,8 @@ const appInitializerFn = (env: Environment) => {
     CallbackComponent,
 
     BreadcrumbComponent,
+
+    TinyEditor,
 
     HomeComponent,
 
@@ -122,6 +131,7 @@ const appInitializerFn = (env: Environment) => {
     MatFormFieldModule,
     MatDialogModule,
     MatSelectModule,
+    EditorModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
     OAuthModule.forRoot(),
@@ -150,6 +160,7 @@ const appInitializerFn = (env: Environment) => {
   providers: [
     Environment,
     Title,
+    ServiceLocator,
     AuthHelper,
     MainApiClient,
     BreadcrumbService,
@@ -172,4 +183,8 @@ const appInitializerFn = (env: Environment) => {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private injector: Injector){    // Create global Service Injector.
+    ServiceLocator.injector = this.injector;
+  }
+}

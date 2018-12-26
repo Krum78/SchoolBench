@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 using IdentityServer4.AccessTokenValidation;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using SchoolBench.Api.Extensions;
 using SchoolBench.Api.Models;
 using SchoolBench.Api.Services;
@@ -34,6 +30,8 @@ namespace SchoolBench.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
@@ -45,6 +43,19 @@ namespace SchoolBench.Api
                     options.ApiName = "api2";
                 });
 
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+                {
+                    options.Cookie.SameSite = SameSiteMode.Lax;
+                    options.Cookie.Domain = string.Empty;
+                    options.Cookie.Expiration = TimeSpan.FromDays(2);
+                });
+
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
+                });
+            
             services.AddDbContext<SbDataContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IDbAccessService, DbAccessService>();
         }
@@ -67,8 +78,8 @@ namespace SchoolBench.Api
             {
                 builder.AllowAnyOrigin();
                 builder.AllowAnyHeader();
-                builder.AllowCredentials();
                 builder.AllowAnyMethod();
+                builder.AllowCredentials();
                 builder.Build();
             });
 
@@ -92,6 +103,8 @@ namespace SchoolBench.Api
                 cfg.CreateMap<AnswerOptionModel, AnswerOptionEntity>().ForMember(a => a.Question, c => c.Ignore()).ReverseMap();
 
                 cfg.CreateMap<TestResultModel, TestResultEntity>().ReverseMap().ForMember(p => p.Percentage, c => c.MapFrom((src, t) => (int)(src.Score / (double)src.MaxScore * 100)));
+
+                cfg.CreateMap<FileModel, FileEntity>().ReverseMap();
             });
 
             Mapper.Configuration.AssertConfigurationIsValid();

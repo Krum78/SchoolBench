@@ -31,5 +31,7 @@ namespace SchoolBench.Api.Services
         Task<ModuleTestModel> GetModuleTestForStudent(long id);
         Task<TestResultModel> SubmitTestResult(TestResultModel result);
         Task<List<TestResultModel>> GetTestResults(long testId);
+        Task<FileModel> UploadFile(FileModel model);
+        Task<FileModel> GetFile(Guid id);
     }
 }

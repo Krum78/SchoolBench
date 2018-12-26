@@ -18,7 +18,9 @@
             "progress": true,
             "polyfills": "src/polyfills.ts",
             "assets": [
-              "src/assets"
+              "src/assets",
+              "src/skins",
+              "src/plugins"
             ],
             "styles": [
               "src/styles.css",
@@ -31,6 +33,9 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/tinymce/tinymce.min.js",
+              "node_modules/tinymce/themes/modern/theme.js",
+              "node_modules/tinymce/plugins/fullscreen/plugin.js",
               "./node_modules/froala-editor/js/froala_editor.pkgd.min.js"
             ]
           },

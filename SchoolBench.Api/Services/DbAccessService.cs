@@ -316,6 +316,21 @@ namespace SchoolBench.Api.Services
         }
         #endregion
 
+        #region Files
+        public async Task<FileModel> UploadFile(FileModel model)
+        {
+            var track = await _sbContext.Files.AddAsync(Mapper.Map<FileEntity>(model));
+            await _sbContext.SaveChangesAsync();
+            return Mapper.Map<FileModel>(track.Entity);
+        }
+
+        public async Task<FileModel> GetFile(Guid id)
+        {
+            return Mapper.Map<FileModel>(await _sbContext.Files.FindAsync(id));
+            
+        }
+        #endregion
+
         public void Dispose()
         {
             _sbContext?.Dispose();
