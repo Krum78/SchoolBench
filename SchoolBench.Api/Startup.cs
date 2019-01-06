@@ -1,11 +1,8 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using AutoMapper;
 using IdentityServer4.AccessTokenValidation;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -41,19 +38,7 @@ namespace SchoolBench.Api
                     options.RequireHttpsMetadata = true;
                     options.EnableCaching = true;
                     options.ApiName = "api2";
-                });
-
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
-                {
-                    options.Cookie.SameSite = SameSiteMode.Lax;
-                    options.Cookie.Domain = string.Empty;
-                    options.Cookie.Expiration = TimeSpan.FromDays(2);
-                });
-
-            services.AddAuthentication(options =>
-                {
-                    options.DefaultAuthenticateScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
+                    options.SaveToken = true;
                 });
             
             services.AddDbContext<SbDataContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));

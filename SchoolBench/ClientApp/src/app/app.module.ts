@@ -12,7 +12,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 
 import { EditorModule } from '@tinymce/tinymce-angular';
-import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 import { OAuthModule } from 'angular-oauth2-oidc';
 
@@ -132,8 +131,6 @@ const appInitializerFn = (env: Environment) => {
     MatDialogModule,
     MatSelectModule,
     EditorModule,
-    FroalaEditorModule.forRoot(),
-    FroalaViewModule.forRoot(),
     OAuthModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full', data: { breadcrumb: "Home" } },

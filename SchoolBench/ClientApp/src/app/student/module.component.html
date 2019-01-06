@@ -11,12 +11,12 @@
 
     <div role="tabpanel" class="tab-pane active" id="moduleTab">
       <div>
-        
+
         <h2><strong>{{module.name}}</strong></h2>
         <hr />
         <p>{{module.description}}</p>
         <hr />
-        <div [froalaView]="module.data"></div>
+        <div [innerHTML]="module.data | sanitizeHtml"></div>
       </div>
     </div>
 

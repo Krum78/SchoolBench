@@ -29,7 +29,7 @@ namespace SchoolBench.Api.Controllers
                     Email = identity.Claims.FirstOrDefault(c => c.Type == "email")?.Value
                 };
 
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+                //await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
 
                 return Ok(user);
             }

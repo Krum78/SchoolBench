@@ -13,7 +13,7 @@
 
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="previewQuestionTab{{question.itemOrder}}">
-      <div [froalaView]="question.question"></div>
+      <div [innerHTML]="question.question | sanitizeHtml"></div>
       <hr />
       <mat-radio-group *ngIf="question.type == 1" class="answer-radio-group">
         <div *ngFor="let answer of question.answerOptions" [class.bg-success]="answer.isCorrect">
@@ -23,7 +23,7 @@
         </div>
       </mat-radio-group>
       <div *ngIf="question.type == 2">
-        <div *ngFor="let answer of question.answerOptions"  [class.bg-success]="answer.isCorrect">
+        <div *ngFor="let answer of question.answerOptions" [class.bg-success]="answer.isCorrect">
           <mat-checkbox [labelPosition]="after">
             {{answer.text}}
           </mat-checkbox>
@@ -44,7 +44,7 @@
         </div>
       </div>
       <hr />
-      <div [froalaEditor] [(froalaModel)]="question.question"></div>
+      <tyni-editor [(model)]="question.question"></tyni-editor>
     </div>
 
     <div *ngIf="auth.isUserCreator" role="tabpanel" class="tab-pane" id="answersTab{{question.itemOrder}}">

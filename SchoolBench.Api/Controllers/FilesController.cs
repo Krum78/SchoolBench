@@ -25,9 +25,12 @@ namespace SchoolBench.Api.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+        [AllowAnonymous]
         public async Task<ActionResult<byte[]>> GetFile(Guid id)
         {
+            if (!Request.Cookies.ContainsKey("idsrv.session"))
+                return Forbid();
+
             var fileModel = await _dbAccess.GetFile(id);
 
             return File(fileModel.FileContent, fileModel.ContentType, fileModel.FileName);
