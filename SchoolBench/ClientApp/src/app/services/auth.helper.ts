@@ -15,6 +15,8 @@ export class AuthHelper  {
   private authenticated: boolean = false;
   private userObj: User = null;
 
+  userName: string = "";
+
   isUserCreator: boolean = false;
   isUserTeacher: boolean = false;
   isUserStudent: boolean = false;
@@ -81,6 +83,8 @@ export class AuthHelper  {
       this.isUserTeacher = AuthHelper.isInRole(this.userObj, 'Teacher');
       this.isUserStudent = AuthHelper.isInRole(this.userObj, 'Student');
 
+      this.userName = this.userObj.name;
+
       this.userInfoUpdatedSubject.next(this.userObj);
     }
 
@@ -109,6 +113,7 @@ export class AuthHelper  {
     if (!this.authenticated && this.userObj !== null) {
       this.userObj = null;
       this.isUserCreator = this.isUserTeacher = this.isUserStudent = false;
+      this.userName = null;
     }
   }
 }

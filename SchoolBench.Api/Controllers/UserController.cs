@@ -25,6 +25,7 @@ namespace SchoolBench.Api.Controllers
                 User user = new User
                 {
                     Login = identity.Name,
+                    Name = identity.Name,
                     Roles = identity.Claims.Where(c => c.Type == identity.RoleClaimType).Select(c => c.Value).ToArray(),
                     Email = identity.Claims.FirstOrDefault(c => c.Type == "email")?.Value
                 };
