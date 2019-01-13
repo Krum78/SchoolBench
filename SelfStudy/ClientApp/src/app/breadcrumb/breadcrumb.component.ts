@@ -144,8 +144,9 @@ export class BreadcrumbService {
   selector: "breadcrumb",
   template: `
     <ol class="breadcrumb">
-      <li *ngFor="let breadcrumb of breadcrumbs">
-        <a [routerLink]="[breadcrumb.url]">{{ breadcrumb.label }}</a>
+      <li *ngFor="let breadcrumb of breadcrumbs; last as isLast">
+        <a *ngIf="!isLast" [routerLink]="[breadcrumb.url]">{{ breadcrumb.label }}</a>
+        <strong *ngIf="isLast">{{ breadcrumb.label }}</strong>
       </li>
     </ol>
   `
