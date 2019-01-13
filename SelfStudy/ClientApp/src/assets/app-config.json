@@ -1,0 +1,13 @@
+{
+  "authConfig": {
+    "issuer": "https://oherasymov-is4.azurewebsites.net",
+    "requireHttps": "true",
+    "redirectUri": "https://oherasymov-sb.azurewebsites.net/oidc-callback",
+    "postLogoutRedirectUri": "https://oherasymov-sb.azurewebsites.net",
+    "logoutUrl": "https://oherasymov-sb.azurewebsites.net",
+    "silentRefreshRedirectUri": "https://oherasymov-sb.azurewebsites.net/silent-refresh.html",
+    "clientId": "4d7c3a0292d24c7abc7f7ee9fdf5b403",
+    "scope": "openid profile api1 api2"
+  },
+  "mainApiUrl": "https://oherasymov-sb-api.azurewebsites.net/api/"
+}
