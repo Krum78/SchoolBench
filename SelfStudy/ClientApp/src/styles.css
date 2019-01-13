@@ -41,6 +41,8 @@ div .tab-pane {
 
 .home-img {
   display: block;
+  -ms-border-radius: 20px;
+  border-radius: 20px;
   width: 100%;
   margin-top: 4em;
   margin-left: auto;
