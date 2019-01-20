@@ -1,5 +1,5 @@
-import { Component, OnInit, Injectable, Injector } from "@angular/core";
-import { Router, ActivatedRoute, NavigationEnd, Params, PRIMARY_OUTLET } from "@angular/router";
+import { Component, OnInit, Injectable } from "@angular/core";
+import { Router, ActivatedRoute, NavigationEnd, Params } from "@angular/router";
 import { Title } from '@angular/platform-browser';
 import { filter } from "rxjs/operators";
 
@@ -157,10 +157,6 @@ export class BreadcrumbComponent implements OnInit {
     return this.service.breadcrumbs;
   }
 
-  /**
-   * @class DetailComponent
-   * @constructor
-   */
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -168,12 +164,6 @@ export class BreadcrumbComponent implements OnInit {
   ) {
   }
 
-  /**
-   * Let's go!
-   *
-   * @class DetailComponent
-   * @method ngOnInit
-   */
   ngOnInit() {
 
     //subscribe to the NavigationEnd event

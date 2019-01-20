@@ -27,9 +27,6 @@ namespace SelfStudy.Api.Controllers
         [AllowAnonymous]
         public async Task<ActionResult<byte[]>> GetFile(Guid id)
         {
-            if (!Request.Cookies.ContainsKey("idsrv.session"))
-                return Forbid();
-
             var fileModel = await _dbAccess.GetFile(id);
 
             return File(fileModel.FileContent, fileModel.ContentType, fileModel.FileName);
