@@ -41,7 +41,7 @@ namespace SelfStudy.Api
                     options.SaveToken = true;
                 });
             
-            services.AddDbContext<SbDataContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<PortalDataContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IDbAccessService, DbAccessService>();
         }
 

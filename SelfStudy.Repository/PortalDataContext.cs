@@ -3,14 +3,9 @@ using SelfStudy.Repository.Entities;
 
 namespace SelfStudy.Repository
 {
-    public class SbDataContext : DbContext
+    public class PortalDataContext : DbContext
     {
-        public SbDataContext()
-        {
-
-        }
-
-        public SbDataContext(DbContextOptions options) : base(options)
+        public PortalDataContext(DbContextOptions options) : base(options)
         {
         }
 
